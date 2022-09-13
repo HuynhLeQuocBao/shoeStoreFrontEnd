@@ -1,0 +1,125 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  GIT_CLEAN_FLAGS: ''
+
+.development: &development
+  variables:
+    SOME_VAR: for_development
+  tags:
+    - build
+    - development
+    - deploy
+  environment: development
+  only:
+    - develop
+
+.staging: &staging
+  variables:
+    SOME_VAR: for_staging
+  tags:
+    - build
+    - staging
+    - deploy
+  environment: staging
+  only:
+    - /^releases\/.*/
+
+.production: &production
+  variables:
+    SOME_VAR: for_production
+  tags:
+    - build
+    - production
+    - deploy
+  environment: production
+  only:
+    - /^v.*/
+  except:
+    - branches
+
+# #######################################
+# # Reuse Scripts
+# #######################################
+.deploy_script: &deploy_script
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - echo "Deploying application..."
+    - docker-compose -f docker-compose.deployment.yml up -d
+    - echo "Application successfully deployed."
+
+before_script:
+  - echo "Before script"
+
+# #######################################
+# # DEVELOPMENT JOBS
+# #######################################
+build-development-job:
+  <<: *development
+  stage: build
+  script:
+    - whoami
+    - pwd
+    - cp ./deployment/dotfiles/.env.development .env
+    - echo >> .env
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .env
+    - docker-compose -f docker-compose.deployment.yml config
+    - echo "Compiling the code..."
+    - docker-compose -f docker-compose.deployment.yml build
+    - echo "Compile complete."
+
+deploy-development-job:
+  <<: *development
+  <<: *deploy_script
+  dependencies:
+    - build-development-job
+
+# #######################################
+# # STAGING JOBS
+# #######################################
+build-staging-job:
+  <<: *staging
+  stage: build
+  script:
+    - whoami
+    - pwd
+    - cp ./deployment/dotfiles/.env.staging .env
+    - echo >> .env
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .env
+    - docker-compose -f docker-compose.deployment.yml config
+    - echo "Compiling the code..."
+    - docker-compose -f docker-compose.deployment.yml build
+    - echo "Compile complete."
+
+deploy-staging-job:
+  <<: *staging
+  <<: *deploy_script
+  dependencies:
+    - build-staging-job
+
+# #######################################
+# # PRODUCTION JOBS
+# #######################################
+build-production-job:
+  <<: *production
+  stage: build
+  script:
+    - whoami
+    - pwd
+    - cp ./deployment/dotfiles/.env.production .env
+    - echo >> .env
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .env
+    - docker-compose -f docker-compose.deployment.yml config
+    - echo "Compiling the code..."
+    - docker-compose -f docker-compose.deployment.yml build
+    - echo "Compile complete."
+
+deploy-production-job:
+  <<: *production
+  <<: *deploy_script
+  dependencies:
+    - build-production-job
