@@ -7,24 +7,28 @@ import clsx from "clsx";
 
 import { Container } from "@/components/common/index";
 import { MenuItem, MenuProfile } from "@/components/menu/index";
-import ModalLogin from "@/components/section/modal-login/ModalLogin";
+import { FaShoppingCart, FaUserAlt } from "react-icons/fa";
 
 const navigation = [
   {
-    name: "Trang chủ",
-    href: "/damchattoi",
+    name: "HOME",
+    href: "/",
   },
   {
-    name: "Thể lệ cuộc thi",
-    href: "/the-le-cuoc-thi",
+    name: "MEN",
+    href: "/shoes-for-men",
   },
   {
-    name: "Gửi bài dự thi",
-    href: "/gui-bai-du-thi",
+    name: "WOMEN",
+    href: "/shoes-for-women",
   },
   {
-    name: "Tìm hiểu về TV The Serif",
-    href: "/tim-hieu-ve-tv-the-serif",
+    name: "ABOUT",
+    href: "/about",
+  },
+  {
+    name: "CONTACT",
+    href: "/contact",
   },
 ];
 
@@ -40,10 +44,10 @@ function MobileNavigation({ ShowModal }) {
   const router = useRouter();
 
   return (
-    <Popover className="ml-auto lg:hidden">
+    <Popover className="ml-auto md:hidden">
       {({ open, close }) => (
         <>
-          <Popover.Button className="relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none text-white">
+          <Popover.Button className="relative z-30 flex h-10 w-10 items-center justify-center [&:not(:focus-visible)]:focus:outline-none text-white bg-[#595959]">
             <span className="sr-only">Toggle Navigation</span>
             {open ? <MenuIconCloseSVG /> : <MenuIconSVG />}
           </Popover.Button>
@@ -57,7 +61,7 @@ function MobileNavigation({ ShowModal }) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Popover.Overlay className="fixed inset-0 bg-slate-300/50" />
+              <Popover.Overlay className="fixed inset-0 bg-slate-300/50 z-20" />
             </Transition.Child>
             <Transition.Child
               as={Fragment}
@@ -70,7 +74,7 @@ function MobileNavigation({ ShowModal }) {
             >
               <Popover.Panel
                 as="ul"
-                className="absolute inset-x-0 top-full mt-4 origin-top space-y-4 rounded-2xl bg-black p-6 tracking-tight shadow-xl ring-1 ring-slate-900/5 text-center"
+                className="absolute inset-x-3 top-full space-y-4 rounded-2xl bg-[#595959] p-6 shadow-xl flex flex-col items-center justify-around z-30"
               >
                 {navigation.map((item) => (
                   <li key={item.name} onClick={close}>
@@ -81,9 +85,17 @@ function MobileNavigation({ ShowModal }) {
                     />
                   </li>
                 ))}
-                <li>
-                  <MenuProfile ShowModal={ShowModal} />
-                </li>
+                  <li onClick={close}>
+                    <a href="/">
+                      <div className="flex flex-row text-white md:text-black font-[Rokkitt] font-normal hover:text-primary focus:text-primary">
+                        <div className="text-2xl">
+                          <FaShoppingCart />
+                        </div>
+                        <p className="mx-2">CART</p>
+                        <p>[0]</p>
+                      </div>
+                    </a>
+                  </li>
               </Popover.Panel>
             </Transition.Child>
           </Transition.Root>
@@ -115,24 +127,33 @@ export function Header() {
 
   return (
     <header
-      className={clsx("py-2 lg:py-4 bg-black sticky z-50 top-0", {
+      className={clsx("sticky z-50 top-0", {
         "shadow-lg": isScrolled,
       })}
     >
       <Container>
-        <div className="flex items-center relative z-50 pl-16 md:pl-28 lg:pl-20">
-          <div className="max-w-[75px] sm:max-w-[300px]">
-            <Link href="/damchattoi">
-              <a>
-                <img src="/images/logo/sam_sung_the_serif.png" alt="" />
-              </a>
-            </Link>
+        <div className="flex flex-col md:justify-evenly md:h-[170px] md:mt-[25px]">
+          <div className="flex flex-col px-3 py-7 md:flex-row md:justify-between">
+            <div className="">
+              <div className="mb-5 flex flex-row items-center justify-between md:mb-0" >
+                <a href="/" className="text-[#595959] text-4xl font-bold">
+                  Footwear
+                </a>
+                <MobileNavigation ShowModal={ShowModal} />
+              </div>
+            </div>
+            <div className="mb-5 md:mb-0">
+              <form className="flex relative">
+                <input type="text" placeholder="Search" className="h-[40px] w-full rounded-[30px] pl-4 pr-[4.5rem] focus:outline-none overflow-hidden border" />
+                <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-[#595959]"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
           </div>
 
-          <nav className="ml-auto hidden lg:block">
-            <ul className="flex items-center space-x-7">
+          <div className="hidden md:flex md:flex-row md:justify-between md:mt-[25px]">
+            <ul className="flex flex-row">
               {navigation.map((item) => (
-                <li key={item.name}>
+                <li key={item.name} className="my-2 mx-3">
                   <MenuItem
                     href={item.href}
                     name={item.name}
@@ -140,15 +161,31 @@ export function Header() {
                   />
                 </li>
               ))}
-
+            </ul>
+            <ul className="flex items-center my-2 mx-3">
+              <li className="mr-20">
+                <a href="/">
+                  <div className="flex flex-row text-black font-[Rokkitt] font-normal hover:text-primary focus:text-primary">
+                    <div className="m-auto text-2xl">
+                      <FaShoppingCart />
+                    </div>
+                    <p className="mx-2">CART</p>
+                    <p>[0]</p>
+                  </div>
+                </a>
+              </li>
               <li>
-                <MenuProfile ShowModal={ShowModal} />
+                <a href="/login">
+                  <div className="flex flex-row text-black font-[Rokkitt] font-normal hover:text-primary focus:text-primary">
+                    <div className="m-auto text-2xl">
+                      <FaUserAlt />
+                    </div>
+                    <p className="mx-2">LOGIN</p>
+                  </div>
+                </a>
               </li>
             </ul>
-          </nav>
-
-          <MobileNavigation ShowModal={ShowModal} />
-          <ModalLogin open={open} setOpen={setOpen} />
+          </div>
         </div>
       </Container>
     </header>

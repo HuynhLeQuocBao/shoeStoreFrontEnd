@@ -1,12 +1,15 @@
-export const getServerSideProps = async ({ res }) => {
-  res.setHeader("location", `/damchattoi`);
+import { Prize } from '@/components/section/prize/index';
+import React from 'react';
 
-  res.statusCode = 302;
-  res.end();
 
-  return { props: {} };
-};
+export default function Index() {
+    return (
+      <>
+        <Prize />
+      </>
+    )
+}
 
-const Index = () => <>Index</>;
 
-export default Index;
+
+

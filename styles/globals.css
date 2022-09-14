@@ -4,14 +4,8 @@
 
 @layer base {
   @font-face {
-    font-family: "iCiel Samsung Sharp Sans";
-    src: url("/fonts/iCielSamsungSharpSans/iCielSamsungSharpSans-Bold.woff2")
-        format("woff2"),
-      url("/fonts/iCielSamsungSharpSans/iCielSamsungSharpSans-Bold.woff")
-        format("woff");
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+    font-family: "Rokkitt Georgia serif";
+    font-weight: 400;
   }
 
   @font-face {
@@ -98,160 +92,10 @@
   }
 
   html {
-    font-family: "iCiel Samsung Sharp Sans";
+    font-family: "Montserrat", Arial, sans-serif;
     font-weight: 500;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply text-xl text-primary capitalize border border-x-0 border-primary font-bold p-[6px] transition-all duration-300 ease-linear hover:text-black hover:border-black;
-  }
-  .btn-black {
-    @apply text-xl text-black capitalize border border-x-0 border-black font-bold p-[6px] transition-all duration-300 ease-linear hover:text-primary hover:border-primary;
-  }
-
-  .btn-secondary {
-    @apply btn-primary text-black;
-  }
-  .btn-banner {
-    @apply btn-primary border-white text-[8.5px] sm:text-xs md:text-xl p-0 md:p-[6px] leading-5 sm:leading-6 md:leading-5 hover:text-white hover:border-primary;
-  }
-  .img-prize {
-    @apply object-cover md:max-w-full md:h-full;
-  }
-  .prize {
-    @apply bg-[url('/images/prize/background.png')] bg-no-repeat bg-cover sm:pl-12 grid md:grid-cols-2 md:gap-x-8 md:my-28;
-  }
-  .inputForm {
-    @apply w-full rounded-[10px] border-2 border-[#333333] p-2 placeholder-[#333333] text-[#333333] text-lg;
-  }
-  .btn-modal-fb {
-    @apply bg-blue;
-  }
-  .btn-modal-gg {
-    @apply bg-black;
-  }
-
-  .modal-btn {
-    @apply w-[125px] h-[35px] rounded-[4px] overflow-hidden;
-  }
-
-  
-
-}
-
-.slick-slide > div {
-  @apply px-6 h-full;
-}
-
-.slick-slider .slick-dots {
-  @apply leading-none space-x-5 text-[0px] bottom-0;
-}
-
-.slick-slider .slick-dots li,
-.slick-slider .slick-dots li button {
-  @apply w-auto h-auto p-0 m-0;
-}
-
-.slick-slider .slick-dots > :not([hidden]) ~ :not([hidden]) {
-  @apply ml-2 md:ml-5;
-}
-
-.slick-slider .slick-dots li button::before {
-  content: "";
-  @apply top-auto left-auto relative w-[98px] h-[6px] opacity-100 inline-block transition-all duration-300 ease-linear bg-primary;
-}
-
-.slick-slider .slick-dots li.slick-active button::before,
-.slick-slider .slick-dots li button:hover:before {
-  @apply bg-secondary;
-}
-
-.slick-slider {
-  @apply pb-12 md:pb-[80px];
-}
-
-/* .slick-track {
-  display: flex !important;
-}
-
-.slick-slide {
-  flex: unset !important;
-  height: inherit !important;
-} */
-
-ul.slick-dots li {
-  @apply opacity-50;
-}
-ul.slick-dots li.slick-active {
-  @apply opacity-100;
-}
-
-.subject .slick-slider .slick-dots li button::before {
-  content: "";
-  @apply top-auto left-auto relative w-[15px] h-[15px] opacity-100 inline-block transition-all duration-300 ease-linear bg-primary rounded-full;
-}
-
-.subject ul.slick-dots {
-  @apply top-[14px] left-[70%] sm:left-[50%] md:left-[70%] lg:left-[50%] xl:left-[40%] -translate-x-[50%] h-fit max-w-fit;
-}
-
-.design-slider .slick-slider .slick-dots li button::before {
-  content: "";
-  @apply top-auto left-auto relative w-[18px] h-[3px] md:w-[50px] xl:w-[98px] md:h-[6px] opacity-100 inline-block transition-all duration-300 ease-linear bg-primary rounded-full;
-}
-
-.arrow {
-  @apply opacity-70 md:opacity-100 text-primary hover:text-white rounded-full flex justify-center items-center border border-solid border-primary bg-white absolute top-[30%] xl:top-[40%] z-[10] text-[24px] w-10 h-10 hover:bg-primary hover:border-white cursor-pointer md:text-[3rem] font-bold;
-}
-
-.arrow-right {
-  @apply right-6 md:right-[9.75rem] lg:right-[18.75rem];
-}
-.arrow-left {
-  @apply left-6 md:left-[9.75rem] lg:left-[18.75rem];
-}
-
-.arrow-1 {
-  @apply  absolute top-[62%] md:top-[46%] z-[10] text-5xl font-bold text-white hover:text-primary w-10 h-10 cursor-pointer;
-}
-
-.arrow-right-1 {
-  @apply right-[1.5rem] md:right-[2.5%] lg:right-[2%];
-}
-.arrow-left-1 {
-  @apply left-[1rem] md:left-[50.5%];
-}
-
-ul#headlessui-popover-panel-\:RqmH1\: {
-  @apply mt-0;
-}
-
-.select-known__control {
-    @apply border-none min-h-0 !important;
-  }
-.select-known__indicators {
-  @apply hidden !important;
-}
-.select-known__placeholder {
-  @apply text-inherit m-0 !important;
-}
-.select-known__control--is-focused {
-  @apply border-transparent shadow-none  !important ;
-}
-.select-known__value-container {
-  @apply p-0 !important;
-}
-.select-known__single-value {
-  @apply m-0 !important;
-}
-.select-known__input-container {
-  @apply m-0 p-0 !important;
-}
-.select-known__option.select-known__option--is-focused {
-  @apply bg-transparent text-primary cursor-pointer !important;
-}
-.select-known__option.select-known__option--is-selected {
-  @apply bg-transparent text-black;
 }

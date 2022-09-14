@@ -11,7 +11,7 @@ module.exports = {
         xl: ['3px 3px 0px #F6F6F6', '3px 3px 0px #99CCCC'],
       },
       colors: {
-        primary: '#DE93A6',
+        primary: '#88c8bc',
         secondary: '#BE8184',
         third: '#C97E83',
         blue: '#1877f2',
