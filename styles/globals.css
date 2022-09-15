@@ -3,15 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: "Rokkitt" Georgia serif;
-    font-weight: 400;
-  }
 
-  html {
-    font-family: "Rokkitt" Georgia serif;
-    font-weight: 500;
-  }
 }
 
 @layer components {
