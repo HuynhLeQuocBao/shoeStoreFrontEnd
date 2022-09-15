@@ -10,7 +10,7 @@ export function MenuItem({ name, href, isActive }) {
             hover:text-primary
           `,
           {
-            "text-primary border-b-2 border-primary": isActive,
+            "text-[#595959] md:text-primary border-b-2 md:border-primary border-[#595959]": isActive,
           }
         )}
       >

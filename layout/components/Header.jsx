@@ -47,7 +47,7 @@ function MobileNavigation({ ShowModal }) {
     <Popover className="ml-auto md:hidden">
       {({ open, close }) => (
         <>
-          <Popover.Button className="relative z-30 flex h-10 w-10 items-center justify-center [&:not(:focus-visible)]:focus:outline-none text-white bg-[#595959]">
+          <Popover.Button className="relative z-30 flex h-10 w-10 items-center justify-center [&:not(:focus-visible)]:focus:outline-none bg-primary outline-none rounded-2xl">
             <span className="sr-only">Toggle Navigation</span>
             {open ? <MenuIconCloseSVG /> : <MenuIconSVG />}
           </Popover.Button>
@@ -74,7 +74,7 @@ function MobileNavigation({ ShowModal }) {
             >
               <Popover.Panel
                 as="ul"
-                className="absolute inset-x-3 top-40 space-y-4 rounded-2xl bg-[#595959] p-6 shadow-xl flex flex-col items-center justify-around z-30"
+                className="absolute inset-x-3 top-40 space-y-4 rounded-2xl bg-primary p-6 shadow-xl flex flex-col items-center justify-around z-30 font-Rokkitt"
               >
                 {navigation.map((item) => (
                   <li key={item.name} onClick={close}>
@@ -87,7 +87,7 @@ function MobileNavigation({ ShowModal }) {
                 ))}
                   <li onClick={close}>
                     <a href="/">
-                      <div className="flex flex-row text-white md:text-black font-[Rokkitt] font-normal hover:text-primary focus:text-primary">
+                      <div className="flex flex-row text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
                         <div className="text-2xl">
                           <FaShoppingCart />
                         </div>
@@ -128,7 +128,7 @@ export function Header() {
   return (
     <header
       className={clsx("md:sticky z-50 top-0 bg-white", {
-        "shadow-lg": isScrolled,
+        "md:shadow-lg": isScrolled,
       })}
     >
       <Container>
@@ -136,7 +136,7 @@ export function Header() {
           <div className="flex flex-col px-3 py-7 md:flex-row md:justify-between">
             <div className="">
               <div className="mb-5 flex flex-row items-center justify-between md:mb-0" >
-                <a href="/" className="text-[#595959] text-4xl font-bold">
+                <a href="/" className="text-secondary text-4xl font-bold">
                   Footwear
                 </a>
                 <MobileNavigation ShowModal={ShowModal} />
@@ -145,12 +145,12 @@ export function Header() {
             <div className="mb-5 md:mb-0">
               <form className="flex relative">
                 <input type="text" placeholder="Search" className="h-[40px] w-full rounded-[30px] pl-4 pr-[4.5rem] focus:outline-none overflow-hidden border" />
-                <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-[#595959]"><i className="fa fa-search"></i></button>
+                <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-secondary"><i className="fa fa-search"></i></button>
               </form>
             </div>
           </div>
 
-          <div className="hidden md:flex md:flex-row md:justify-between md:mt-[25px]">
+          <div className="hidden font-Rokkitt md:flex md:flex-row md:justify-between md:mt-[25px]">
             <ul className="flex flex-row">
               {navigation.map((item) => (
                 <li key={item.name} className="my-2 mx-3">
@@ -165,7 +165,7 @@ export function Header() {
             <ul className="flex items-center my-2 mx-3">
               <li className="mr-20">
                 <a href="/">
-                  <div className="flex flex-row text-black font-[Rokkitt] font-normal hover:text-primary focus:text-primary">
+                  <div className="flex flex-row text-black hover:text-primary focus:text-primary">
                     <div className="m-auto text-2xl">
                       <FaShoppingCart />
                     </div>
@@ -176,7 +176,7 @@ export function Header() {
               </li>
               <li>
                 <a href="/login">
-                  <div className="flex flex-row text-black font-[Rokkitt] font-normal hover:text-primary focus:text-primary">
+                  <div className="flex flex-row text-black font-normal hover:text-primary focus:text-primary">
                     <div className="m-auto text-2xl">
                       <FaUserAlt />
                     </div>
