@@ -145,7 +145,7 @@ export function Header() {
             <div className="mb-5 md:mb-0">
               <form className="flex relative">
                 <input type="text" placeholder="Search" className="h-[40px] w-full rounded-[30px] pl-4 pr-[4.5rem] focus:outline-none overflow-hidden border" />
-                <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-[#595959]"><i class="fa fa-search"></i></button>
+                <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-[#595959]"><i className="fa fa-search"></i></button>
               </form>
             </div>
           </div>

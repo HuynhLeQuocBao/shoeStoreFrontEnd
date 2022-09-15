@@ -4,8 +4,8 @@ import ScrollToTop from "react-scroll-to-top";
 export function MainLayout({ children }) {
   return (
     <div>
-      <Header />
-      {/* <BannerText /> */}
+      {/* <Header />
+      <BannerText /> */}
 
       <main>{children}</main>
       <ScrollToTop
@@ -13,7 +13,7 @@ export function MainLayout({ children }) {
         className='!rounded-[50%]'
         component={<BackToTop />}
       />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
