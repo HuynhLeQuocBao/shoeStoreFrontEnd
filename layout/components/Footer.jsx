@@ -44,7 +44,7 @@ export function FooterTitle({ mainTitle, titlesArr = [] }, link) {
 export function Footer() {
   const images = [
     {
-      images: ["brand-1.jpg", "brand-2.jpg", "brand-3.jpg", "brand-4.jpg", "brand-5.jpg"],
+      images: ["brand-1.jpg", "brand-4.jpg", "brand-3.jpg", "brand-5.jpg", "brand-2.jpg"],
     },
   ];
 

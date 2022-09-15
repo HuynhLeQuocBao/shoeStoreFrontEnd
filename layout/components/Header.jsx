@@ -74,7 +74,7 @@ function MobileNavigation({ ShowModal }) {
             >
               <Popover.Panel
                 as="ul"
-                className="absolute inset-x-3 top-full space-y-4 rounded-2xl bg-[#595959] p-6 shadow-xl flex flex-col items-center justify-around z-30"
+                className="absolute inset-x-3 top-40 space-y-4 rounded-2xl bg-[#595959] p-6 shadow-xl flex flex-col items-center justify-around z-30"
               >
                 {navigation.map((item) => (
                   <li key={item.name} onClick={close}>
@@ -127,7 +127,7 @@ export function Header() {
 
   return (
     <header
-      className={clsx("sticky z-50 top-0", {
+      className={clsx("md:sticky z-50 top-0 bg-white", {
         "shadow-lg": isScrolled,
       })}
     >

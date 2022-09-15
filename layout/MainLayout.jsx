@@ -4,8 +4,8 @@ import ScrollToTop from "react-scroll-to-top";
 export function MainLayout({ children }) {
   return (
     <div>
-      {/* <Header />
-      <BannerText /> */}
+      <Header />
+      {/* <BannerText /> */}
 
       <main>{children}</main>
       <ScrollToTop
