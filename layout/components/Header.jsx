@@ -96,6 +96,16 @@ function MobileNavigation({ ShowModal }) {
                       </div>
                     </a>
                   </li>
+                  <li>
+                    <a onClick={close}>
+                      <div className="flex flex-row text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
+                        <div className="text-2xl">
+                          <FaUserAlt />
+                        </div>
+                        <p className="mx-2">LOGIN</p>
+                      </div>
+                    </a>
+                  </li>
               </Popover.Panel>
             </Transition.Child>
           </Transition.Root>
