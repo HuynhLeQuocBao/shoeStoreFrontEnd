@@ -7,4 +7,7 @@
 }
 
 @layer components {
+  .responsive-iframe {
+    @apply w-full h-80 xl:w-[540px] md:h-[400px];
+  }
 }

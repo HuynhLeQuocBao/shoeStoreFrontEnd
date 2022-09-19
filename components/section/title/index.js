@@ -1,1 +1,2 @@
-export * from './title';
+export * from './Title';
+export * from './Breadcum';

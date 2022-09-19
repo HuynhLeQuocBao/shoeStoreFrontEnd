@@ -23,7 +23,7 @@ export function FooterTitle({ mainTitle, titlesArr = [] }, link) {
   return (
     <div className="flex flex-col mb-10 md:px-5 xl:px-10 uppercase">
       <div className="mb-3 md:mb-5">
-        <h4 className="font-Rokkitt whitespace-nowrap text-lg text-black md:text-base font-semibold">
+        <h4 className="font-Rokkitt whitespace-nowrap text-base text-black font-semibold">
           {mainTitle}
         </h4>
       </div>
@@ -31,7 +31,7 @@ export function FooterTitle({ mainTitle, titlesArr = [] }, link) {
         {titlesArr.map((title) => (
           <div
             key={title}
-            className="font-Rokkitt text-base md:text-xs text-secondary font-light text-left mb-2"
+            className="font-Rokkitt text-sm text-secondary font-light text-left mb-2"
           >
             <a href={`${link}`} >{title}</a>
           </div>
@@ -72,7 +72,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="px-4">
+    <footer className="px-4 md:px-0">
       <Container>
         <div className="py-24">
           <div className="text-xl pb-20 text-center text-[#0000004D] font-Rokkitt font-semibold">
@@ -91,11 +91,11 @@ export function Footer() {
           <div className="flex flex-col xl:justify-center flex-wrap md:flex-row xl:flex-nowrap">
             <div className="flex flex-col mb-10 md:px-5 xl:px-10">
               <div className="mb-3 md:mb-5">
-                <h4 className="font-Rokkitt whitespace-nowrap text-lg text-secondary md:text-base font-semibold">
+                <h4 className="font-Rokkitt whitespace-nowrap text-base text-secondary md:text-base font-semibold">
                   ABOUT FOOTWEAR
                 </h4>
               </div>
-              <div className="font-Rokkitt text-base font-light mb-2 md:text-left md:text-xs text-secondary">
+              <div className="font-Rokkitt text-sm font-light mb-2 md:text-left md:text-xs text-secondary">
                 <p className="leading-loose text-justify md:text-left md:max-w-fit">
                   Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life
                 </p>

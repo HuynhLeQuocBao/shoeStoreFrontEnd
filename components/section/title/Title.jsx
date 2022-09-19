@@ -5,7 +5,7 @@ import { Container } from '@/components/common/index';
 export function Title() {
   return (
     <Container>
-      <div className="font-Rokkitt text-4xl font-bold text-center py-24">
+      <div className="mx-4 md:mx-0 font-Rokkitt text-4xl font-bold text-center py-24">
         <h2>It started with a simple idea: Create quality, well-designed products that I wanted myself.</h2>
       </div>
     </Container>
