@@ -31,6 +31,8 @@ export function BestSeller() {
     }
   }, []);
 
+  console.log(process.env)
+
   return (
     <Container>
       <div className="font-Rokkitt text-4xl font-bold text-center py-24">
@@ -38,7 +40,7 @@ export function BestSeller() {
       </div>
       <div className="mx-4 md:mx-0 pb-14 flex justify-evenly flex-wrap">
         {data.map((item)=> (
-          <Link href={"/"}>
+          <Link key={item._id} href={"/"}>
             <div className="cursor-pointer" onClick={()=> alert(item._id)}>
               <Product 
                 image={item.arrayImage[0].filename}
