@@ -24,17 +24,17 @@ export function Breadcum() {
   ];
   return (
     <Container>
-      <div className="py-3 mx-4 xl:mx-0 text-base font-Rokkitt text-primary">
+      <div className="py-3 mx-4 md:mx-0 text-base font-Rokkitt text-primary">
 
         <Link href="/">
-          <a>
+          <div className="cursor-pointer">
             Home / 
             {navigation.map((item) => {
               if(router.pathname === item.href) {
                 return <span className="text-black">{item.name}</span>;
               }
             })}
-          </a>
+          </div>
         </Link>
       </div>
     </Container>

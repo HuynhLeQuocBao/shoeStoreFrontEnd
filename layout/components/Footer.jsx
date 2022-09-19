@@ -72,7 +72,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="px-4">
+    <footer className="px-4 md:px-0">
       <Container>
         <div className="py-24">
           <div className="text-xl pb-20 text-center text-[#0000004D] font-Rokkitt font-semibold">

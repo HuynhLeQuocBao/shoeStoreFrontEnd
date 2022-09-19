@@ -143,7 +143,7 @@ export function Header() {
     >
       <Container>
         <div className="flex flex-col md:justify-evenly md:h-[170px] md:mt-[25px]">
-          <div className="flex flex-col mx-4 xl:mx-0 py-7 md:flex-row md:justify-between">
+          <div className="flex flex-col mx-4 md:mx-0 py-7 md:flex-row md:justify-between">
             <div className="">
               <div className="mb-5 flex flex-row items-center justify-between md:mb-0" >
                 <a href="/" className="text-secondary text-4xl font-bold">
@@ -163,7 +163,7 @@ export function Header() {
           <div className="hidden font-Rokkitt md:flex md:flex-row md:justify-between md:mt-[25px]">
             <ul className="flex flex-row">
               {navigation.map((item) => (
-                <li key={item.name} className="my-2 mr-3">
+                <li key={item.name} className="my-2 mr-4">
                   <MenuItem
                     href={item.href}
                     name={item.name}

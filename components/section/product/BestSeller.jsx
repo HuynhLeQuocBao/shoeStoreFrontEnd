@@ -6,15 +6,15 @@ import Link from "next/link";
 
 export function Product({ image, name, price }) {
   return (
-        <div className="flex flex-col items-center justify-center mb-7 border border-[#dee2e6]">
-          <div>
-            <img src={`http://localhost:3010/upload/${image}`} alt="" className="w-64 h-64 pb-4" />
-          </div>
-          <div className="text-center font-Rokkitt text-lg">
-            <p className="pb-4">{name}</p>
-            <p className="pb-4">${price}</p>
-          </div>
-        </div>
+    <div className="flex flex-col items-center justify-center mb-7 border border-[#dee2e6]">
+      <div>
+        <img src={`http://localhost:3010/upload/${image}`} alt="" className="w-full h-full lg:w-64 lg:h-64 pb-4" />
+      </div>
+      <div className="text-center font-Rokkitt text-lg">
+        <p className="pb-4">{name}</p>
+        <p className="pb-4">${price}</p>
+      </div>
+    </div>
   );
 }
 export function BestSeller() {
@@ -30,22 +30,22 @@ export function BestSeller() {
       console.log("Error");
     }
   }, []);
-  console.log(data)
+
   return (
     <Container>
       <div className="font-Rokkitt text-4xl font-bold text-center py-24">
         <h2>Best Sellers</h2>
       </div>
-      <div className="pb-14 flex justify-between flex-wrap">
+      <div className="mx-4 md:mx-0 pb-14 flex justify-evenly flex-wrap">
         {data.map((item)=> (
-          <Link href={`${item._id}`}>
-            <a>
+          <Link href={"/"}>
+            <div className="cursor-pointer" onClick={()=> alert(item._id)}>
               <Product 
                 image={item.arrayImage[0].filename}
                 name={item.name}
                 price={item.price}
               />
-            </a>
+            </div>
           </Link>
         ))}
       </div>
