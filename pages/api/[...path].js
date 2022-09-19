@@ -13,7 +13,7 @@ export default function handler(req, res) {
     // don't send cookie to API server
     req.headers.cookie = '';
 
-    // api/students ==> https:xxxxxxx/api/students
+    // api/students ==> https:xxxxxxx/students
 
     proxy.web(req, res, {
       target: process.env.API_URL,
