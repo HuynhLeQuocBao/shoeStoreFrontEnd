@@ -12,7 +12,8 @@ module.exports = {
         secondary: '#595959',
       },
       fontFamily: {
-        Rokkitt: '"Rokkitt", Georgia, serif',
+        // Rokkitt: '"Rokkitt", Georgia, serif',
+        Rokkitt: '"Oswal", Arial, sans-serif',
       },
     },
   },

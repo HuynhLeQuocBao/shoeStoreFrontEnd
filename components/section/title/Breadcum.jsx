@@ -31,7 +31,7 @@ export function Breadcum() {
             Home / 
             {navigation.map((item) => {
               if(router.pathname === item.href) {
-                return <span className="text-black">{item.name}</span>;
+                return <span className="text-black ml-1">{item.name}</span>;
               }
             })}
           </div>
