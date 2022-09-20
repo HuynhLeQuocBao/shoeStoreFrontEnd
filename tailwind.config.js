@@ -14,6 +14,22 @@ module.exports = {
       fontFamily: {
         Rokkitt: '"Rokkitt", Georgia, serif',
       },
+      keyframes: {
+        banner: {
+          '0%': {
+            opacity: 0,
+            transform: 'translate(-50%, 40%)',
+          },
+          '50%': { opacity: 1 },
+          '100%': {
+            opacity: 1,
+            transform: 'translate(-50%, -50%)',
+          }
+        }
+      },
+      animation: {
+        'banner': 'banner 2s cubic-bezier(0, 0.49, 0.82, 0.98) 1 forwards',
+      }
     },
   },
   plugins: [],
