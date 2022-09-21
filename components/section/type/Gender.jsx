@@ -14,12 +14,12 @@ export function Gender() {
     }
   ];
   return (
-    <div className="pb-24 mx-4 md:mx-0">
+    <div className="mx-4 md:mx-0">
       <div className="flex flex-wrap md:flex-nowrap items-center justify-around">
       {content.map((item, index) => (
         <Link key={index} href={item.href}>
           <div className="w-full px-[14px] py-[28px] cursor-pointer flex flex-col items-center">
-            <img src={`/images/type/${item.image}`} alt="" className="w-full md:w-[600px] md:h-96 xl:w-full xl:h-full mb-5" />
+            <img src={`/images/type/${item.image}`} alt="" className="w-full md:w-[600px] md:h-96 xl:w-full xl:h-full mb-5 object-cover" />
             <p className="xl:text-center text-xl xl:text-4xl font-normal">{item.title}</p>
           </div>   
         </Link>

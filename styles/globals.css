@@ -7,12 +7,12 @@
 }
 
 @layer components {
-  .responsive-iframe {
-    @apply w-full h-80 xl:w-[540px] md:h-[400px];
-  }
+}
+.responsive-iframe {
+  @apply w-full h-80 xl:w-[540px] md:h-[400px];
 }
 .slick-slide > div {
-  @apply px-6 h-full;
+  @apply h-full;
 }
 
 .slick-slider .slick-dots {

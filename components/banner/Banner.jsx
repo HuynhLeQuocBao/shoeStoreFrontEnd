@@ -16,6 +16,7 @@ export function Banner() {
     };
     const settings = {
         dots: true,
+        arrows:false,
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -24,7 +25,7 @@ export function Banner() {
         cssEase: "linear",
     };
     return (
-        <div className="font-Rokkitt">
+        <div className="font-Rokkitt py-4 max-w-full">
             <Slider {...settings}>
                 <div className="h-[500px] w-full relative">
                     <img className="w-full h-full object-cover" src="/images/banner/banner1.jpg" />
@@ -35,19 +36,19 @@ export function Banner() {
                         viewport={{ once: false, amount: 0.5 }}
                     >
                         <div className="absolute text-white text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                            <div className="text-6xl font-bold my-2 ">
+                            <div className="text-3xl md:text-6xl font-bold my-2 md:my-4 ">
                                 MEN'S
                             </div>
-                            <div className="text-3xl font-bold my-2 ">
+                            <div className="text-xl md:text-3xl font-bold my-2 md:my-4 ">
                                 SHOES
                             </div>
-                            <div className="text-[50px] my-2 font-thin">
+                            <div className="text-4xl md:text-[50px] my-2 md:my-4 font-thin">
                                 COLLECTION
                             </div>
-                            <div className="text-[#ffffffcc] my-2">
+                            <div className="text-[#ffffffcc] my-2 md:my-4">
                                 NEW TRENDING SHOES
                             </div>
-                            <button className="bg-[#616161] px-[30px] py-[15px] rounded-3xl my-2 ">
+                            <button className="bg-[#616161] hover:bg-primary px-[30px] py-[15px] rounded-3xl my-2 md:my-4">
                                 SHOP COLLECTION
                             </button>
                         </div>
@@ -62,19 +63,22 @@ export function Banner() {
                         viewport={{ once: false, amount: 0.5 }}
                     >
                         <div className="absolute text-white text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                            <div className="text-6xl font-bold my-2 ">
+                            <div className="text-3xl md:text-6xl font-bold my-2 md:my-4 ">
                                 HUGE
                             </div>
-                            <div className="text-3xl font-bold my-2">
+                            <div className="text-xl md:text-3xl font-bold my-2 md:my-4">
                                 SALES
                             </div>
-                            <div className="text-[50px] my-2 font-thin">
+                            <div className="text-4xl md:text-[50px] my-2 md:my-4 font-thin">
                                 <strong>50%</strong> OFF
                             </div>
-                            <div className="text-[#ffffffcc] my-2">
+                            <div className="text-[#ffffffcc] my-2 md:my-4">
                                 Big sale sandals
                             </div>
-                            <button className="bg-[#616161] px-[30px] py-[15px] rounded-3xl my-2 ">
+                            <button className="bg-[#616161] hover:bg-primary px-[30px] py-[15px] rounded-3xl my-2 md:my-4 ">
+                                SHOP COLLECTION
+                            </button>
+                            <button className="bg-[#616161] hover:bg-primary px-[30px] py-[15px] rounded-3xl my-2 md:my-4">
                                 SHOP COLLECTION
                             </button>
                         </div>
@@ -90,19 +94,19 @@ export function Banner() {
                         viewport={{ once: false, amount: 0.5 }}
                     >
                         <div className="absolute text-white text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                            <div className="text-6xl font-bold my-2 ">
+                            <div className="text-3xl md:text-6xl font-bold my-2 md:my-4 ">
                                 NEW
                             </div>
-                            <div className="text-3xl font-bold my-2">
+                            <div className="text-xl md:text-3xl font-bold my-2 md:my-4">
                                 ARRIVAL
                             </div>
-                            <div className="text-[50px] my-2 font-thin">
+                            <div className="text-4xl md:text-[50px] my-2 md:my-4 font-thin">
                                 UP TO <strong>30%</strong> OFF
                             </div>
-                            <div className="text-[#ffffffcc] my-2">
+                            <div className="text-[#ffffffcc] my-2 md:my-4">
                                 New stylish shoes for men
                             </div>
-                            <button className="bg-[#616161] px-[30px] py-[15px] rounded-3xl my-2 ">
+                            <button className="bg-[#616161] hover:bg-primary px-[30px] py-[15px] rounded-3xl my-2 md:my-4 ">
                                 SHOP COLLECTION
                             </button>
                         </div>
