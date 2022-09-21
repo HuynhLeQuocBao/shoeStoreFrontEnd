@@ -19,22 +19,22 @@ export function MenProduct() {
     }
   }, []);
 
-  const brands = [ "Nike", "Adidas", "Merel", "Gucci", "Skechers" ];
+  const brands = ["Nike", "Adidas", "Merel", "Gucci", "Skechers"];
 
-  const sizes= [
-    "7","7.5",
-    "8","8.5",
-    "9","9.5",
-    "10","10.5",
-    "11","11.5",
-    "12","12.5",
-    "13","13.5",
+  const sizes = [
+    "7", "7.5",
+    "8", "8.5",
+    "9", "9.5",
+    "10", "10.5",
+    "11", "11.5",
+    "12", "12.5",
+    "13", "13.5",
     "14",
   ];
 
-  const widths = [ "M", "W"];
+  const widths = ["M", "W"];
 
-  const styles = [ "Slip Ons", "Boots", "Sandals", "Lace Ups", "Oxfords"];
+  const styles = ["Slip Ons", "Boots", "Sandals", "Lace Ups", "Oxfords"];
 
   const colors = ["Black", "White", "Blue", "Red", "Green", "Grey", "Orange", "Cream", "Brown"];
 
@@ -86,30 +86,14 @@ export function MenProduct() {
                 ))
               }
             </div>
-            <div className="w-full border border-[#dee2e6] px-4 py-4">
-              <h3 className="font-base font-semibold text-black pb-6">MATERIAL</h3>
-              {
-                materials.map((item, index) => (
-                  <p className="cursor-pointer hover:text-primary" key={index}>{item}</p>
-                ))
-              }
-            </div>
-            <div className="w-full border border-[#dee2e6] px-4 py-4">
-              <h3 className="font-base font-semibold text-black pb-6">TECHNOLOGIES</h3>
-              {
-                technologies.map((item, index) => (
-                  <p className="cursor-pointer hover:text-primary" key={index}>{item}</p>
-                ))
-              }
-            </div>
           </div>
         </div>
         <div className="col-span-3">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:gap-8 pb-14">
-            {data.map((item)=> (
+            {data.map((item) => (
               <Link key={item._id} href={"/"}>
-                <div className="cursor-pointer" onClick={()=> alert(item._id)}>
-                  <Product 
+                <div className="cursor-pointer" onClick={() => alert(item._id)}>
+                  <Product
                     image={item.arrayImage[0].filename}
                     name={item.name}
                     price={item.price}
