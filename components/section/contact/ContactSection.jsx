@@ -70,7 +70,7 @@ export function ContactSection() {
               </form>
             </div>
             <div className="h-96 xl:h-full">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d501726.4614814887!2d106.41434363731501!3d10.754665779313365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529292e8d3dd1%3A0xf15f5aad773c112b!2zSOG7kyBDaMOtIE1pbmgsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1663822316649!5m2!1svi!2s" width="100%" height="100%" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.8795348076715!2d-73.99865654909114!3d40.742676179227054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bb665a5b95%3A0x37d23ed9e6c9479e!2s198%20W%2021st%20St%20%23721%2C%20New%20York%2C%20NY%2010011%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1663840797386!5m2!1svi!2s" width="100%" height="100%"></iframe>
             </div>
         </div>
       </div>
