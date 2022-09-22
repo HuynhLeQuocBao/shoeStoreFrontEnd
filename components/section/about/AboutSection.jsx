@@ -5,7 +5,7 @@ import { Container } from '@/components/common/index';
 export function AboutSection() {
   return (
     <Container>
-      <div className="py-24 mx-4 md:mx-0 flex flex-col xl:flex-row">
+      <div className="mx-4 md:mx-0 flex flex-col xl:flex-row">
         <div className="flex items-center justify-center">
           <iframe className="responsive-iframe" src="https://www.youtube.com/embed/R9UZ7-zKLT4" title="DMD Footwear AMFD All Day Video Ad" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
