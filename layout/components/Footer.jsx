@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Container } from "@/components/common/index";
 import { FaTwitter, FaFacebookF, FaLinkedin, FaInstagram } from "react-icons/fa";
+import Link from "next/link";
 
 export function FooterImage({ images = [] }) {
   return (
@@ -33,7 +34,9 @@ export function FooterTitle({ mainTitle, titlesArr = [] }, link) {
             key={title}
             className="font-Rokkitt text-sm text-secondary font-light text-left mb-2"
           >
-            <a href={`${link}`} >{title}</a>
+            <Link href={link}>
+              <div>{title}</div>
+            </Link>
           </div>
         ))}
       </div>
@@ -52,22 +55,22 @@ export function Footer() {
     {
       mainTitle: "Customer Care",
       subTitle: ["Contact", "Returns/Exchange","Gift Voucher", "Wishlist", "Special", "Customer Services", "Site maps"],
-      link: "/",
+      link: "/contact",
     },
     {
       mainTitle: "Information",
       subTitle: ["About us", "Delivery Information", "Privacy Policy", "Support", "Order Tracking"],
-      link: "/",
+      link: "/contact",
     },
     {
       mainTitle: "News",
       subTitle: ["Blog", "Press", "Exhibitions"],
-      link: "/",
+      link: "/contact",
     },
     {
       mainTitle: "Contact Information",
       subTitle: ["291 South 21th Street", "Suite 721 New York NY 10016", "+ 1235 2355 98", "info@yoursite.com", "yoursite.com"],
-      link: "/",
+      link: "/contact",
     },
   ];
 
