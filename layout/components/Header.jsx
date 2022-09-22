@@ -85,27 +85,27 @@ function MobileNavigation({ ShowModal }) {
                     />
                   </li>
                 ))}
-                  <li onClick={close}>
-                    <a href="/">
-                      <div className="flex flex-row text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
-                        <div className="text-2xl">
-                          <FaShoppingCart />
-                        </div>
-                        <p className="mx-2">CART</p>
-                        <p>[0]</p>
+                <li onClick={close}>
+                  <a href="/">
+                    <div className="flex flex-row text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
+                      <div className="text-2xl">
+                        <FaShoppingCart />
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a onClick={close}>
-                      <div className="flex flex-row text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
-                        <div className="text-2xl">
-                          <FaUserAlt />
-                        </div>
-                        <p className="mx-2">LOGIN</p>
+                      <p className="mx-2">CART</p>
+                      <p>[0]</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a onClick={close}>
+                    <div className="flex flex-row text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
+                      <div className="text-2xl">
+                        <FaUserAlt />
                       </div>
-                    </a>
-                  </li>
+                      <p className="mx-2">LOGIN</p>
+                    </div>
+                  </a>
+                </li>
               </Popover.Panel>
             </Transition.Child>
           </Transition.Root>
@@ -142,8 +142,8 @@ export function Header() {
       })}
     >
       <Container>
-        <div className="flex flex-col md:justify-evenly md:h-[170px] md:mt-[25px]">
-          <div className="flex flex-col mx-4 md:mx-0 py-7 md:flex-row md:justify-between">
+        <div className="flex flex-col md:justify-evenly md:h-[120px] ">
+          <div className="flex flex-col mx-4 md:mx-0 md:flex-row md:justify-between">
             <div className="">
               <div className="mb-5 flex flex-row items-center justify-between md:mb-0" >
                 <a href="/" className="text-secondary text-4xl font-bold">
@@ -160,10 +160,10 @@ export function Header() {
             </div>
           </div>
 
-          <div className="hidden font-Rokkitt md:flex md:flex-row md:justify-between md:mt-[25px]">
+          <div className="hidden font-Rokkitt md:flex md:flex-row md:justify-between">
             <ul className="flex flex-row">
               {navigation.map((item) => (
-                <li key={item.name} className="my-2 mr-4">
+                <li key={item.name} className="my-2 mr-8">
                   <MenuItem
                     href={item.href}
                     name={item.name}
