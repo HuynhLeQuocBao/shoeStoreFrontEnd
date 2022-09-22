@@ -13,7 +13,7 @@ import Script from 'next/script';
 import { normalizeSettingsData } from '@/utils/normalization/normalizeSettingsData';
 
 function MyApp(props) {
-  const { Component, pageProps, session, settings } = props;
+  const { Component, pageProps, session } = props;
   const Layout = Component.Layout ?? MainLayout;
 
   const handleExitComplete = () => {
@@ -25,34 +25,11 @@ function MyApp(props) {
   return (
     <>
       <Head>
-        <title>{settings.title}</title>
-        <meta property='og:title' content='Samsung TV The Serif' key='title' />
+        <title>Footwear</title>
+        <meta property='og:title' content='Footwear' key='title' />
         <link rel='shortcut icon' href='/favicon.png' />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       </Head>
-
-      <Script
-        id='gtm'
-        strategy='afterInteractive'
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer', '${settings.GTM_ID}');
-          `,
-        }}
-      />
-
-      <noscript>
-        <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${settings.GTM_ID}`}
-          height='0'
-          width='0'
-          style={{ display: 'none', visibility: 'hidden' }}
-        />
-      </noscript>
 
       <SWRConfig
         value={{
