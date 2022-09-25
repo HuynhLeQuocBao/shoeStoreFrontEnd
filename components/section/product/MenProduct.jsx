@@ -4,6 +4,7 @@ import { Container } from "@/components/common/index";
 import { useEffect, useState } from "react";
 import { Product } from "./Product";
 import Link from "next/link";
+import { Pagination } from ".";
 
 export function MenProduct() {
   const [data, setData] = useState([]);
@@ -89,19 +90,7 @@ export function MenProduct() {
           </div>
         </div>
         <div className="col-span-3">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:gap-8 pb-14">
-            {data.map((item) => (
-              <Link key={item._id} href={"/"}>
-                <div className="cursor-pointer" onClick={() => alert(item._id)}>
-                  <Product
-                    image={item.arrayImage[0].filename}
-                    name={item.name}
-                    price={item.price}
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
+          <Pagination data={data} itemsPerPage={9} />
           <div className="mb-5 flex items-center justify-center">
             <button className="text-sm py-[18px] px-9 bg-primary text-white md:text-base rounded-[30px] hover:bg-secondary hover:text-white">
               <a href="">

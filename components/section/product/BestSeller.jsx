@@ -4,6 +4,7 @@ import { Container } from "@/components/common/index";
 import { useEffect, useState } from "react";
 import { Product } from "./Product";
 import Link from "next/link";
+import { Pagination } from ".";
 
 export function BestSeller() {
   const [data, setData] = useState([]);
@@ -33,10 +34,10 @@ export function BestSeller() {
             <h2>Best Sellers</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 md:gap-8 pb-14">
-            {data.map((item)=> (
+            {data.map((item) => (
               <Link key={item._id} href={"/"}>
-                <div className="cursor-pointer" onClick={()=> alert(item._id)}>
-                  <Product 
+                <div className="cursor-pointer" onClick={() => alert(item._id)}>
+                  <Product
                     image={item.arrayImage[0].filename}
                     name={item.name}
                     price={item.price}
@@ -55,24 +56,12 @@ export function BestSeller() {
         </div>
       }
       {
-        !flag &&      
+        !flag &&
         <div className="mx-6 md:mx-0">
           <div className="font-Rokkitt text-xl text-[#0000004D] font-semibold text-center pb-24">
             <h2>VIEW ALL PRODUCTS</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 md:gap-8 pb-14">
-            {data.map((item)=> (
-              <Link key={item._id} href={"/"}>
-                <div className="cursor-pointer" onClick={()=> alert(item._id)}>
-                  <Product 
-                    image={item.arrayImage[0].filename}
-                    name={item.name}
-                    price={item.price}
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
+          <Pagination data={data} itemsPerPage={8} />
         </div>
       }
     </Container>

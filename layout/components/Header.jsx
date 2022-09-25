@@ -86,15 +86,15 @@ function MobileNavigation({ ShowModal }) {
                   </li>
                 ))}
                 <li onClick={close}>
-                  <a href="/">
-                    <div className="flex flex-row text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
+                  <Link href="/shopping-cart" className="cursor-pointer">
+                    <div className="flex flex-row  text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
                       <div className="text-2xl">
                         <FaShoppingCart />
                       </div>
                       <p className="mx-2">CART</p>
                       <p>[0]</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a onClick={close}>
@@ -174,15 +174,15 @@ export function Header() {
             </ul>
             <ul className="flex items-center my-2 mr-3">
               <li className="mr-20">
-                <a href="/">
-                  <div className="flex flex-row text-black hover:text-primary focus:text-primary">
+                <Link href="/shopping-cart">
+                  <div className="flex flex-row cursor-pointer text-black hover:text-primary focus:text-primary">
                     <div className="m-auto text-2xl">
                       <FaShoppingCart />
                     </div>
                     <p className="mx-2">CART</p>
                     <p>[0]</p>
                   </div>
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="/login">
