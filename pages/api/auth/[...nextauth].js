@@ -18,11 +18,10 @@ export default NextAuth({
 		async jwt({ token, user, account }) {
 			try {
 				// Call multiple if use useSession
+				console.log("user login",user);
 				if (user) {
-					console.log("User", user);
 					const result = await axios.post(
-						`${process.env.API_URL}/auth/${account.provider}`,
-						// { ...user, avatar: user.image }
+						`${process.env.API_URL}/api/v1/auth/${account.provider}`,
 						{
 							userId: user.id,
 							fullname: user.name,

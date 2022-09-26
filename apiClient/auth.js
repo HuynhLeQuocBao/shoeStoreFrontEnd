@@ -1,19 +1,13 @@
 import axiosClient from './axiosClient';
 
 export const authApi = {
-  userLogin() {
-    return axiosClient.post('auth/handleLogin');
+  userLogin(data) {
+    return axiosClient.post('auth/handleLogin', data);
   },
-  googleLogin() {
-    return axiosClient.post('auth/google');
+  verifyToken(data) {
+    return axiosClient.post('auth/verifyToken', data);
   },
-  facebookLogin() {
-    return axiosClient.post('auth/facebook');
-  },
-  verifyToken() {
-    return axiosClient.post('auth/verifyToken');
-  },
-  refreshToken() {
-    return axiosClient.post('auth/refreshToken');
+  refreshToken(data) {
+    return axiosClient.post('auth/refreshToken', data);
   },
 };

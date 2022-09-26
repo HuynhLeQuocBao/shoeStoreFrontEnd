@@ -37,6 +37,14 @@ export function Breadcum() {
       name: "Order Complete",
       href: "/order-complete",
     },
+    {
+      name: "Login",
+      href: "/login",
+    },
+    {
+      name: "Register",
+      href: "/register",
+    },
   ];
   return (
     <Container>
@@ -47,7 +55,7 @@ export function Breadcum() {
             Home / 
             {navigation.map((item) => {
               if (router.pathname === item.href) {
-                return <span className="text-black ml-1">{item.name}</span>;
+                return <span key={item.name} className="text-black ml-1">{item.name}</span>;
               }
             })}
           </div>

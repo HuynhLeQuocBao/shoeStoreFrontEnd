@@ -97,14 +97,7 @@ function MobileNavigation({ ShowModal }) {
                   </Link>
                 </li>
                 <li onClick={close}>
-                  <Link href="/login">
-                    <div className="flex flex-row text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
-                      <div className="text-2xl">
-                        <FaUserAlt />
-                      </div>
-                      <p className="mx-2">LOGIN</p>
-                    </div>
-                  </Link>
+                  <MenuProfile />
                 </li>
               </Popover.Panel>
             </Transition.Child>
@@ -161,7 +154,7 @@ export function Header() {
           </div>
 
           <div className="hidden font-Rokkitt md:flex md:flex-row md:justify-between">
-            <ul className="flex flex-row">
+            <ul className="flex flex-row items-center">
               {navigation.map((item) => (
                 <li key={item.name} className="my-2 mr-8">
                   <MenuItem
@@ -173,7 +166,7 @@ export function Header() {
               ))}
             </ul>
             <ul className="flex items-center my-2 mr-3">
-              <li className="mr-20">
+              <li className="my-2 mr-8">
                 <Link href="/shopping-cart">
                   <div className="flex flex-row cursor-pointer text-black hover:text-primary focus:text-primary">
                     <div className="m-auto text-2xl">
@@ -185,14 +178,7 @@ export function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/login">
-                  <div className="flex flex-row cursor-pointer text-black font-normal hover:text-primary focus:text-primary">
-                    <div className="m-auto text-2xl">
-                      <FaUserAlt />
-                    </div>
-                    <p className="mx-2">LOGIN</p>
-                  </div>
-                </Link>
+                <MenuProfile />
               </li>
             </ul>
           </div>
