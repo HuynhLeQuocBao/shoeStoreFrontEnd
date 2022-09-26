@@ -39,28 +39,33 @@ const arrCartItems = [
 ]
 
 export function ShoppingCart() {
+    const [dataCart, setDataCart] = useState()
+    const [checkDelete, setCheckDelete] = useState(false)
     useEffect(() => {
         try {
             const fetchCart = async () => {
-                const dataCart = await cartApi.getAllCart();
-                console.log(dataCart)
+                const data = await cartApi.getAllCart();
+                console.log(data)
+                setDataCart(data.results)
             };
             fetchCart();
         } catch (error) {
             console.log("Error");
         }
-    }, []);
+    }, [checkDelete]);
+
     const handleDeleteItemCart = (id) => {
         const fetchDeleteCart = async () => {
             try {
                 const result = await cartApi.deleteCart(id);
                 console.log({ result });
+                setCheckDelete(true)
             } catch (error) {
             }
         };
         fetchDeleteCart();
     }
-
+    console.log('aaaaaa', dataCart)
     return (
         <Container>
             <ProgressCart />
@@ -82,8 +87,8 @@ export function ShoppingCart() {
                         <span>REMOVE</span>
                     </div>
                 </div>
-                {arrCartItems &&
-                    arrCartItems.map((item, index) => {
+                {dataCart &&
+                    dataCart.map((item, index) => {
                         return (
                             <div key={index} className='w-full text-sm grid grid-cols-12  border border-b-2 '>
                                 <div className=' font-medium col-span-5 flex justify-start items-center py-2 pl-2'>
@@ -96,7 +101,7 @@ export function ShoppingCart() {
                                     <span>${item.productPrice}</span>
                                 </div>
                                 <div className='text-center col-span-2 flex justify-center items-center'>
-                                    <FormQuantity quantity={item.quantity} cartId={item.id} />
+                                    <FormQuantity quantity={item.quantity} cartId={item._id} />
                                 </div>
                                 <div className='col-span-2  text-center flex justify-center items-center'>
                                     <span>${item.total}</span>
@@ -104,7 +109,7 @@ export function ShoppingCart() {
                                 <div className='text-center col-span-2 flex justify-center items-center pr-2'>
                                     <button
                                         className='text-blue-500 hover:text-blue-800 cursor-pointer'
-                                        onClick={() => handleDeleteItemCart(item.id)}
+                                        onClick={() => handleDeleteItemCart(item._id)}
                                     >
                                         Delete
                                     </button>
@@ -116,8 +121,8 @@ export function ShoppingCart() {
 
             </div>
             <div className='w-full px-4 my-32 md:hidden'>
-                {arrCartItems &&
-                    arrCartItems.map((item, index) => {
+                {dataCart &&
+                    dataCart.map((item, index) => {
                         return (
                             <div key={index} className='w-full grid grid-cols-12 mb-5 shadow-md shadow-[#88c8bc]'>
                                 <div className='w-full flex items-center col-span-4'>
@@ -132,7 +137,7 @@ export function ShoppingCart() {
                                         <span>price: ${item.productPrice}</span>
                                     </div>
                                     <div className='w-full'>
-                                        <FormQuantity quantity={item.quantity} cartId={item.id} />
+                                        <FormQuantity quantity={item.quantity} cartId={item._id} />
                                     </div>
                                     <div className='w-full font-bold'>
                                         <span>Total: ${item.total}</span>
@@ -141,7 +146,7 @@ export function ShoppingCart() {
                                 <div className='col-span-2 flex justify-center items-center'>
                                     <button
                                         className='w-10 h-10 cursor-pointer text-red-500 hover:text-red-800'
-                                        onClick={() => handleDeleteItemCart(item.id)}
+                                        onClick={() => handleDeleteItemCart(item._id)}
                                     >
                                         X
                                     </button>
