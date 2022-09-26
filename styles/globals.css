@@ -16,7 +16,7 @@
 }
 
 .slick-slider .slick-dots {
-  @apply top-[90%];
+  @apply top-[80%] md:top-[90%];
 }
 
 .slick-slider .slick-dots li,

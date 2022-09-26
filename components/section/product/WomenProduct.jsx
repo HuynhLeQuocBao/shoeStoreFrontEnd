@@ -109,9 +109,7 @@ export function WomenProduct() {
           <Pagination data={data} itemsPerPage={9} />
           <div className="mb-5 flex items-center justify-center">
             <button className="text-sm py-[18px] px-9 bg-primary text-white md:text-base rounded-[30px] hover:bg-secondary hover:text-white">
-              <a href="">
-                Shop All Products
-              </a>
+              Phần làm phân trang
             </button>
           </div>
         </div>

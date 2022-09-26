@@ -22,6 +22,10 @@ export function Breadcum() {
       href: "/contact",
     },
     {
+      name: "Product Detail",
+      href: "/product-detail/[...slug]",
+    },
+    {
       name: "Shopping Cart",
       href: "/shopping-cart",
     },
@@ -33,17 +37,25 @@ export function Breadcum() {
       name: "Order Complete",
       href: "/order-complete",
     },
+    {
+      name: "Login",
+      href: "/login",
+    },
+    {
+      name: "Register",
+      href: "/register",
+    },
   ];
   return (
     <Container>
       <div className="py-3 mx-4 md:mx-0 text-base font-Rokkitt text-primary">
 
         <Link href="/">
-          <div className="cursor-pointer">
-            Home /
+          <div className="cursor-pointer uppercase">
+            Home / 
             {navigation.map((item) => {
               if (router.pathname === item.href) {
-                return <span className="text-black ml-1">{item.name}</span>;
+                return <span key={item.name} className="text-black ml-1">{item.name}</span>;
               }
             })}
           </div>

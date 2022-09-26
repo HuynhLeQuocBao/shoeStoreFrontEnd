@@ -9,10 +9,7 @@ import { Pagination } from ".";
 export function BestSeller() {
   const [data, setData] = useState([]);
   const [flag, setFlag] = useState(true);
-  const showAll = () => {
-    setFlag(!flag);
-    alert(flag);
-  }
+
   useEffect(() => {
     try {
       const fechPublic = async () => {
@@ -24,6 +21,10 @@ export function BestSeller() {
       console.log("Error");
     }
   }, []);
+  
+  const showAll = () => {
+    setFlag(!flag);
+  }
 
   return (
     <Container>
@@ -34,10 +35,10 @@ export function BestSeller() {
             <h2>Best Sellers</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 md:gap-8 pb-14">
-            {data.map((item) => (
-              <Link key={item._id} href={"/"}>
-                <div className="cursor-pointer" onClick={() => alert(item._id)}>
-                  <Product
+            {data.map((item)=> (
+              <Link key={item._id} href={`/product-detail/${item._id}`}>
+                <div className="cursor-pointer">
+                  <Product 
                     image={item.arrayImage[0].filename}
                     name={item.name}
                     price={item.price}
@@ -47,10 +48,8 @@ export function BestSeller() {
             ))}
           </div>
           <div className="mb-5 flex items-center justify-center">
-            <button className="text-sm py-[18px] px-9 bg-primary text-white md:text-base rounded-[30px] hover:bg-secondary hover:text-white">
-              <a onClick={showAll}>
-                Shop All Products
-              </a>
+            <button className="text-sm py-[18px] px-9 bg-primary text-white md:text-base rounded-[30px] hover:bg-secondary hover:text-white" onClick={showAll}>
+              Shop All Products
             </button>
           </div>
         </div>

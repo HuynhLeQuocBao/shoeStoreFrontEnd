@@ -1,4 +1,4 @@
-import { ContactSection } from '@/components/section/contact';
+import { ProductDetail } from '@/components/section/product';
 import { Breadcum } from '@/components/section/title';
 import React from 'react';
 
@@ -6,8 +6,8 @@ import React from 'react';
 export default function About() {
     return (
       <div>
-          <Breadcum />
-          <ContactSection />
+        <Breadcum />
+        <ProductDetail />
       </div>
     )
 }

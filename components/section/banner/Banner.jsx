@@ -46,7 +46,7 @@ export function Banner() {
                             <div className="text-[#ffffffcc] my-2 md:my-4">
                                 NEW TRENDING SHOES
                             </div>
-                            <button className="bg-[#616161] hover:bg-[#ffffffcc] px-[30px] py-[15px] rounded-3xl my-2 md:my-4">
+                            <button className="bg-[#616161] hover:bg-primary px-[30px] py-[15px] rounded-3xl my-2 md:my-4">
                                 SHOP COLLECTION
                             </button>
                         </motion.div>
@@ -74,7 +74,7 @@ export function Banner() {
                             <div className="text-[#ffffffcc] my-2 md:my-4">
                                 Big sale sandals
                             </div>
-                            <button className="bg-[#616161] hover:bg-[#ffffffcc] px-[30px] py-[15px] rounded-3xl my-2 md:my-4 ">
+                            <button className="bg-[#616161] hover:bg-primary px-[30px] py-[15px] rounded-3xl my-2 md:my-4 ">
                                 SHOP COLLECTION
                             </button>
 
@@ -103,7 +103,7 @@ export function Banner() {
                             <div className="text-[#ffffffcc] my-2 md:my-4">
                                 New stylish shoes for men
                             </div>
-                            <button className="bg-[#616161] hover:bg-[#ffffffcc] px-[30px] py-[15px] rounded-3xl my-2 md:my-4 ">
+                            <button className="bg-[#616161] hover:bg-primary px-[30px] py-[15px] rounded-3xl my-2 md:my-4 ">
                                 SHOP COLLECTION
                             </button>
                         </motion.div>
