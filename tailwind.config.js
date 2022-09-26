@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        'complete': '61% 39% 61% 39% / 40% 59% 41% 60% '
+      },
       colors: {
         primary: '#88c8bc',
         secondary: '#595959',

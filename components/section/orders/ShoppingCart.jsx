@@ -5,13 +5,8 @@ import { cartApi } from '@/apiClient/cartAPI';
 import { useState, useEffect } from 'react'
 import { FormQuantity } from './FormQuantity';
 import Link from 'next/link';
+import { ProgressCart } from './ProgressCart';
 
-const steps = [
-    { name: 'SHOPPING CART', href: '#', step: '01', status: 'current' },
-    { name: 'CHECKOUT', href: '#', step: '02', status: 'upcoming' },
-    { name: 'COMPLETE', href: '#', step: '03', status: 'upcoming' },
-
-]
 const arrCartItems = [
     {
         id: "632fbef44eab5c1c28035262",
@@ -42,21 +37,8 @@ const arrCartItems = [
         productPrice: 75,
     }
 ]
-const classNames = (...classes) => {
-    return classes.filter(Boolean).join(' ')
-}
 
 export function ShoppingCart() {
-    const [quantity, setQuantity] = useState([])
-    const {
-        register,
-        control,
-        handleSubmit,
-        formState: { errors },
-        setValue,
-    } = useForm({
-        mode: "onChange"
-    });
     useEffect(() => {
         try {
             const fetchCart = async () => {
@@ -81,66 +63,7 @@ export function ShoppingCart() {
 
     return (
         <Container>
-            <nav aria-label="Progress" className='w-full'>
-                <ol role="list" className="flex justify-center text-[12px] md:text-sm items-center w-full my-20 h-auto">
-                    {steps.map((step, stepIdx) => (
-                        <li key={step.name} className={classNames(stepIdx !== steps.length - 1 ? 'w-full pl-10' : 'px-10', ' relative')}>
-                            {step.status === 'complete' ? (
-                                <>
-                                    {stepIdx !== steps.length - 1 ? (
-                                        <div className="-ml-px absolute mt-0.5 top-4 left-16 w-full h-0.5 bg-primary" aria-hidden="true" />
-                                    ) : null}
-                                    <a href={step.href} className="relative flex items-start group">
-                                        <span className="h-9 flex items-center">
-                                            <span className="text-white z-10 w-20 h-20 flex items-center justify-center bg-primary rounded-full group-hover:bg-primary">
-                                                {step.step}
-                                            </span>
-                                        </span>
-                                        <span className="absolute left-2 sm:-left-2 top-16">
-                                            {step.name}
-                                        </span>
-                                    </a>
-
-                                </>
-                            ) : step.status === 'current' ? (
-                                <>
-                                    {stepIdx !== steps.length - 1 ? (
-                                        <div className="-ml-px absolute mt-0.5 top-4 left-16 w-full h-0.5 bg-gray-300" aria-hidden="true" />
-                                    ) : null}
-                                    <a href={step.href} className="relative flex items-start group" aria-current="step">
-                                        <span className="h-9 flex items-center" aria-hidden="true">
-                                            <span className="z-10 w-20 text-primary h-20 flex items-center justify-center bg-white border-[3px] border-primary rounded-full ">
-                                                {step.step}
-                                            </span>
-                                        </span>
-                                        <span className="absolute left-2 top-16">
-                                            {step.name}
-                                        </span>
-                                    </a>
-
-                                </>
-                            ) : (
-                                <>
-                                    {stepIdx !== steps.length - 1 ? (
-                                        <div className="-ml-px absolute mt-0.5 top-4 left-16 w-full h-0.5 bg-gray-300" aria-hidden="true" />
-                                    ) : null}
-                                    <a href={step.href} className="relative flex items-start group">
-                                        <span className="h-9 flex items-center" aria-hidden="true">
-                                            <span className=" z-10 w-20 h-20 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full group-hover:border-primary">
-                                                {step.step}
-                                            </span>
-                                        </span>
-                                        <span className="absolute left-2  top-16">
-                                            {step.name}
-                                        </span>
-                                    </a>
-
-                                </>
-                            )}
-                        </li>
-                    ))}
-                </ol>
-            </nav>
+            <ProgressCart />
             <div className='hidden md:block w-full my-32'>
                 <div className='w-full bg-slate-400 font-semibold text-base h-8 items-center justify-center uppercase grid grid-cols-12'>
                     <div className='text-center col-span-5'>
