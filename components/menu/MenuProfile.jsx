@@ -7,7 +7,6 @@ import { FaUserAlt } from "react-icons/fa";
 
 export function MenuProfile() {
 	const { data: session } = useSession();
-	console.log(session);
 
 	return (
 		<Menu as="div" className="relative">

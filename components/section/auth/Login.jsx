@@ -3,15 +3,13 @@ import { Container } from "@/components/common/index";
 import { authApi } from "@/apiClient/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
-import axios from "axios";
+import { getSession ,useSession, signIn, signOut } from "next-auth/react";
 
 export function Login() {
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 	const router = useRouter();
 	if(session) {
 		router.push("/");
@@ -23,9 +21,16 @@ export function Login() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-		const result = authApi.userLogin(data);
-		console.log(result);
+  const onSubmit = async (data) => {
+    const ok = await signIn("Credentials", {
+      data,
+      redirect: false,
+    });
+		console.log(ok);
+    if (!ok) {
+      alert("Incorrect account or password");
+			console.log(ok);
+    }
   };
 
 
@@ -38,17 +43,16 @@ export function Login() {
 				<form method="post" onSubmit={handleSubmit(onSubmit)} className="w-1/2">
 					<div className="flex flex-col text-base text-secondary">
 						<div className="flex flex-col mb-4">
-							<label className="cursor-pointer" htmlFor="username">
+							<label className="cursor-pointer" htmlFor="email">
 								Email
 							</label>
 							<input
 								className="px-3 py-2 mt-2 border border-black"
-								id="username"
+								id="email"
 								{...register('email', { required: true })} 
 								type="text"
-								placeholder="Enter your username"
+								placeholder="Enter your email"
 							/>
-								{errors?.email?.type === "required" && <p className="text-red-500">This field is required</p>}
 						</div>
 						<div className="flex flex-col mb-4">
 							<label className="cursor-pointer" htmlFor="password">
@@ -61,7 +65,6 @@ export function Login() {
 								type="password"
 								placeholder="Enter your password"
 							/>
-								{errors?.password?.type === "required" && <p className="text-red-500">This field is required</p>}
 						</div>
 						<div className="my-4 text-center md:text-left">
 							<button
@@ -102,7 +105,7 @@ export function Login() {
 				<div>
 					<p>Don't have an account?
 						<Link href="/register">
-							<span className="cursor-pointer ml-1">Register</span>
+							<span className="cursor-pointer ml-1 hover:text-primary">Register</span>
 						</Link>
 					</p>
 				</div>
