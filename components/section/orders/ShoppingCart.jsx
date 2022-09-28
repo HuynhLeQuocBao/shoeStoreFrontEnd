@@ -77,10 +77,13 @@ export function ShoppingCart() {
                     <div className='text-center col-span-1'>
                         <span>PRICE</span>
                     </div>
+                    <div className='text-center col-span-1'>
+                        <span>SIZE</span>
+                    </div>
                     <div className='text-center col-span-2'>
                         <span>QUANTITY</span>
                     </div>
-                    <div className='col-span-2  text-center'>
+                    <div className='col-span-1  text-center'>
                         <span>TOTAL</span>
                     </div>
                     <div className='text-center col-span-2'>
@@ -100,8 +103,11 @@ export function ShoppingCart() {
                                 <div className='text-center col-span-1 flex justify-center items-center'>
                                     <span>${item.productPrice}</span>
                                 </div>
+                                <div className='text-center col-span-1 flex justify-center items-center'>
+                                    <span>{item.size}</span>
+                                </div>
                                 <div className='text-center col-span-2 flex justify-center items-center'>
-                                    <FormQuantity quantity={item.quantity} cartId={item._id} />
+                                    <FormQuantity quantity={item.quantity} cartId={item._id} productId={item.productId} size={item.size} />
                                 </div>
                                 <div className='col-span-2  text-center flex justify-center items-center'>
                                     <span>${item.total}</span>
@@ -134,10 +140,13 @@ export function ShoppingCart() {
                                         <span>Name: {item.productName}</span>
                                     </div>
                                     <div className='w-full font-bold text-red-500'>
-                                        <span>price: ${item.productPrice}</span>
+                                        <span>Price: ${item.productPrice}</span>
+                                    </div>
+                                    <div className='w-full font-bold '>
+                                        <span>Size: {item.size}</span>
                                     </div>
                                     <div className='w-full'>
-                                        <FormQuantity quantity={item.quantity} cartId={item._id} />
+                                        <FormQuantity quantity={item.quantity} cartId={item._id} productId={item.productId} size={item.size} />
                                     </div>
                                     <div className='w-full font-bold'>
                                         <span>Total: ${item.total}</span>

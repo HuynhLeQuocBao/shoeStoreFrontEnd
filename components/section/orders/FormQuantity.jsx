@@ -3,7 +3,7 @@ import { cartApi } from '@/apiClient/cartAPI';
 import { useState, useEffect } from 'react'
 export function FormQuantity({ ...props }) {
     const [quantity, setQuantity] = useState(props.quantity)
-    const cartId = props.cartId
+    const { cartId, productId, size } = props
     const {
         register,
         control,
@@ -25,7 +25,9 @@ export function FormQuantity({ ...props }) {
     }
     const onSubmit = () => {
         const dataForm = new FormData()
+        dataForm.append('productId', productId)
         dataForm.append('quantity', quantity)
+        dataForm.append('size', size)
         const fetchUpdateCart = async () => {
             try {
                 const result = await cartApi.updateCart(cartId, dataForm);
