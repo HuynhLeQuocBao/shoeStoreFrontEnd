@@ -1,10 +1,28 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
+import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from "axios";
+import { authApi } from "@/apiClient/auth";
 
 export default NextAuth({
 	providers: [
+		CredentialsProvider({
+      name: 'Credentials',
+      async authorize(credentials) {
+        try {
+          const result = await authApi.userLogin({
+            email: credentials.email,
+            password: credentials.password,
+          });
+					console.log(result);
+
+          return result;
+        } catch (error) {
+          return null;
+        }
+      },
+    }),
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -18,7 +36,6 @@ export default NextAuth({
 		async jwt({ token, user, account }) {
 			try {
 				// Call multiple if use useSession
-				console.log("user login",user);
 				if (user) {
 					const result = await axios.post(
 						`${process.env.API_URL}/api/v1/auth/${account.provider}`,
