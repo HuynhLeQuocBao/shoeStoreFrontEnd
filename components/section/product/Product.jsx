@@ -1,3 +1,5 @@
+import { convertCurrency } from "@/utils/currency";
+
 export function Product({ image, name, price }) {
   return (
     <div className="mb-7 flex flex-col items-center justify-center border md:mb-0 border-[#dee2e6]">
@@ -6,7 +8,7 @@ export function Product({ image, name, price }) {
       </div>
       <div className="text-center font-Rokkitt text-lg">
         <p className="pb-4">{name}</p>
-        <p className="pb-4">${price}</p>
+        <p className="pb-4">{convertCurrency(price)}</p>
       </div>
     </div>
   );

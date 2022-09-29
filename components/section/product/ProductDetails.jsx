@@ -70,7 +70,7 @@ export function ProductDetail() {
           {
             <div className="flex flex-col justify-between">
               <h2 className="mb-4 text-xl font-semibold">{data.name}</h2>
-              <h3 className="mb-2 text-lg">${data.price}</h3>
+              <h3 className="mb-2 text-lg">${parseFloat(data.price).toFixed(2)}</h3>
               <h3 className="mb-4 text-xs">RATING</h3>
               <p className="text-sm text-secondary font-light text-justify">{data.introduce}</p>
               <div className="w-full mt-4 mb-8">

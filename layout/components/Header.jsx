@@ -7,7 +7,8 @@ import clsx from "clsx";
 
 import { Container } from "@/components/common/index";
 import { MenuItem, MenuProfile } from "@/components/menu/index";
-import { FaShoppingCart, FaUserAlt } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
+import { MdSearch } from "react-icons/md";
 
 const navigation = [
   {
@@ -147,8 +148,12 @@ export function Header() {
             </div>
             <div className="mb-5 md:mb-0">
               <form className="flex relative">
-                <input type="text" placeholder="Search" className="h-[40px] w-full rounded-[30px] pl-4 pr-[4.5rem] focus:outline-none overflow-hidden border" />
-                <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-secondary"><i className="fa fa-search"></i></button>
+                <input type="text" placeholder="Search" className="h-[40px] w-full rounded-[30px] pl-4 pr-[4.5rem] focus:outline-none overflow-hidden border" name="search" />
+                <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-secondary">
+                  <div className="text-2xl flex items-center justify-center">
+                    <MdSearch />
+                  </div>
+                </button>
               </form>
             </div>
           </div>
