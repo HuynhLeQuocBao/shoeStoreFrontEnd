@@ -22,8 +22,8 @@ export function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const ok = await signIn("Credentials", {
-      data,
+    const ok = await signIn("credentials", {
+      ...data,
       redirect: false,
     });
 		console.log(ok);

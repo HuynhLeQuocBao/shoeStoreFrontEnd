@@ -6,9 +6,10 @@ import axios from "axios";
 import { authApi } from "@/apiClient/auth";
 
 export default NextAuth({
+
 	providers: [
 		CredentialsProvider({
-      name: 'Credentials',
+      type: 'credentials',
       async authorize(credentials) {
         try {
           const result = await authApi.userLogin({
