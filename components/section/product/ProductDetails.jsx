@@ -5,13 +5,18 @@ import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useRouter } from 'next/router';
 import Slider from "react-slick";
+import { useSession } from "next-auth/react";
+import { cartApi } from "@/apiClient/cartAPI";
 
 export function ProductDetail() {
 
   const [data, setData] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState(null);
+  const [width, setWidth] = useState(null);
+  const [isCheck, setCheck] = useState(true);
   const [content, setContent] = useState(1);
-
+  const { data: session } = useSession();
   const router = useRouter();
   const productId = router.query.slug;
 
@@ -27,7 +32,12 @@ export function ProductDetail() {
 };
 
   const handleAsc = () => {
-    setQuantity(quantity++);
+    if(quantity < 1) {
+      setQuantity(1);
+    }
+    else {
+      setQuantity(quantity + 1);
+    }
   }
 
   const handleDesc = () => {
@@ -35,7 +45,18 @@ export function ProductDetail() {
       setQuantity(1);
     }
     else {
-      setQuantity(quantity--);
+      setQuantity(quantity - 1);
+    }
+  }
+
+  const addToCart = async () => {
+    if(session) {
+      const result = await cartApi.addCart({"productId":productId, "quantity":quantity, "size":size});
+      console.log({result})
+    }
+    else {
+      alert("Please login to add cart!");
+      router.push("/login");
     }
   }
 
@@ -50,7 +71,6 @@ export function ProductDetail() {
       console.log("Error");
     }
   }, []);
-  console.log(data);
 
   return (
     <Container>
@@ -77,13 +97,13 @@ export function ProductDetail() {
                 <h3 className="pb-2">SIZE</h3>
                 {
                   data?.size?.map((item, index) => (
-                    <button className="w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer" key={index}>{item.size}</button>
+                    <button onClick={() => setSize(item.size)} className={`w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm  text-white cursor-pointer ${size === item.size ? "bg-primary" : "bg-[#ccc]"}`} key={index}>{item.size}</button>
                   ))
                 }
                 <h3 className="pb-2">WIDTH</h3>
                 {
                   widths.map((item, index) => (
-                    <button className="w-10 h-10 mr-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer" key={index}>{item}</button>
+                    <button onClick={() => setWidth(item)} className={`w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm  text-white cursor-pointer ${width === item ? "bg-primary" : "bg-[#ccc]"}`} key={index}>{item}</button>
                   ))
                 }
               </div>
@@ -98,7 +118,10 @@ export function ProductDetail() {
                   </button>
                 </div>
                 <div>
-                  <button className="flex flex-row items-center w-fit hover:bg-primary rounded-sm bg-secondary text-white px-3 py-2">
+                  <button 
+                    className="flex flex-row items-center w-fit hover:bg-primary rounded-sm bg-secondary text-white px-3 py-2"
+                    onClick={addToCart}
+                  >
                     <div className="text-xl">
                       <FaShoppingCart />
                     </div>

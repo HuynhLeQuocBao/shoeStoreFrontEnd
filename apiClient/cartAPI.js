@@ -4,8 +4,8 @@ export const cartApi = {
     getAllCart() {
         return axiosClient.get('/customer/cart');
     },
-    addCart() {
-        return axiosClient.post('/customer/cart/add');
+    addCart(data) {
+        return axiosClient.post('/customer/cart/add',data);
     },
     updateCart(id, data) {
         return axiosClient.put(`/customer/cart/update/${id}`, data);
