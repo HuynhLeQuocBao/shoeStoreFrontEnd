@@ -51,8 +51,10 @@ export function ProductDetail() {
 
   const addToCart = async () => {
     if(session) {
-      const result = await cartApi.addCart({"productId":productId, "quantity":quantity, "size":size});
-      console.log({result})
+      const result = await cartApi.addCart({"productId":productId[0], "quantity":quantity, "size":size});
+      if(result) {
+        alert()
+      }
     }
     else {
       alert("Please login to add cart!");
