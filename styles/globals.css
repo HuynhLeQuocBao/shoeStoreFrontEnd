@@ -37,3 +37,13 @@
 .slick-slider .slick-dots li button:hover:before {
   @apply bg-[#88c8bc] cursor-pointer;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

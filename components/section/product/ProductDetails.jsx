@@ -7,14 +7,16 @@ import { useRouter } from 'next/router';
 import Slider from "react-slick";
 import { useSession } from "next-auth/react";
 import { cartApi } from "@/apiClient/cartAPI";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function ProductDetail() {
 
   const [data, setData] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null);
-  const [width, setWidth] = useState(null);
   const [isCheck, setCheck] = useState(true);
+  const [width, setWidth] = useState(null);
   const [content, setContent] = useState(1);
   const { data: session } = useSession();
   const router = useRouter();
@@ -29,7 +31,7 @@ export function ProductDetail() {
     slidesToShow: 1,
     slidesToScroll: 1,
     pauseOnHover: false,
-};
+  };
 
   const handleAsc = () => {
     if(quantity < 1) {
@@ -51,14 +53,29 @@ export function ProductDetail() {
 
   const addToCart = async () => {
     if(session) {
-      const result = await cartApi.addCart({"productId":productId[0], "quantity":quantity, "size":size});
-      if(result) {
-        alert()
+      if(quantity <= 0) {
+        toast.warn('Quantity must be larger zero !', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+      else if(size === null) {
+        toast.warn('Please choose size !', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+      else {
+        const result = await cartApi.addCart({"productId":productId[0], "quantity":quantity, "size":size});
+        if(result) {
+          toast.success('Success Add to Cart !', {
+            position: toast.POSITION.TOP_RIGHT
+          });
+        }
       }
     }
     else {
-      alert("Please login to add cart!");
-      router.push("/login");
+      toast.warn('Please login to add cart !', {
+        position: toast.POSITION.TOP_RIGHT
+      });
     }
   }
 
@@ -76,6 +93,7 @@ export function ProductDetail() {
 
   return (
     <Container>
+      <ToastContainer />
       <div className="grid grid-cols-1 xl:grid-cols-8 md:gap-12 mx-6 md:mx-0 py-24">
         <div className="mb-8 col-span-5">
           <Slider {...settings}>
@@ -114,7 +132,7 @@ export function ProductDetail() {
                   <button className="w-10 h-10 mr-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer"
                     onClick={handleDesc} > -
                   </button>
-                  <input onChange={(e)=> setQuantity(e.target.value) } className="text-center w-16 h-full outline-none" type="text" value={quantity} />
+                  <input onChange={(e)=> setQuantity(e.target.value) } className="text-center w-16 h-full outline-none" type="number" min="1" value={quantity} />
                   <button className="w-10 h-10 mr-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer"
                     onClick={handleAsc} > +
                   </button>
@@ -132,6 +150,7 @@ export function ProductDetail() {
                 </div>
               </div>
             </div>
+            
           }
         </div>
       </div>
