@@ -1,13 +1,13 @@
-import axiosClient from './axiosClient';
+import axiosClient from "./axiosClient";
 
 export const authApi = {
-  userLogin(data) {
-    return axiosClient.post('auth/handleLogin', data);
-  },
-  verifyToken(data) {
-    return axiosClient.post('auth/verifyToken', data);
-  },
-  refreshToken(data) {
-    return axiosClient.post('auth/refreshToken', data);
-  },
+	userLogin(data) {
+		return axiosClient.post("auth/login", data);
+	},
+	verifyToken(data) {
+		return axiosClient.post("auth/verifyToken", data);
+	},
+	refreshToken(data) {
+		return axiosClient.post("auth/refreshToken", data);
+	},
 };
