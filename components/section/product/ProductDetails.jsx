@@ -15,7 +15,6 @@ export function ProductDetail() {
   const [data, setData] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null);
-  const [isCheck, setCheck] = useState(true);
   const [width, setWidth] = useState(null);
   const [content, setContent] = useState(1);
   const { data: session } = useSession();
@@ -69,6 +68,9 @@ export function ProductDetail() {
           toast.success('Success Add to Cart !', {
             position: toast.POSITION.TOP_RIGHT
           });
+          setTimeout(() => {
+            router.reload(window.location.pathname)
+          }, 2000);
         }
       }
     }
@@ -76,6 +78,9 @@ export function ProductDetail() {
       toast.warn('Please login to add cart !', {
         position: toast.POSITION.TOP_RIGHT
       });
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
     }
   }
 

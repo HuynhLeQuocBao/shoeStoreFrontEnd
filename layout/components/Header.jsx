@@ -9,6 +9,7 @@ import { Container } from "@/components/common/index";
 import { MenuItem, MenuProfile } from "@/components/menu/index";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdSearch } from "react-icons/md";
+import { cartApi } from "@/apiClient/cartAPI";
 
 const navigation = [
   {
@@ -41,7 +42,7 @@ function MenuIconCloseSVG() {
   return <img src="images/svg/close.svg" />;
 }
 
-function MobileNavigation({ ShowModal }) {
+function MobileNavigation({ cartLength }) {
   const router = useRouter();
 
   return (
@@ -93,7 +94,7 @@ function MobileNavigation({ ShowModal }) {
                         <FaShoppingCart />
                       </div>
                       <p className="mx-2">CART</p>
-                      <p>[0]</p>
+                      <p>[{cartLength || 0}]</p>
                     </div>
                   </Link>
                 </li>
@@ -114,18 +115,19 @@ export function Header() {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState([]);
 
-  // TODO: Move to custom hooks
   useEffect(() => {
-    function onScroll() {
-      setIsScrolled(window.scrollY > 0);
+    try {
+      const fechPublic = async () => {
+        const dataCart = await cartApi.getAllCart();
+        setData(dataCart);
+      };
+      fechPublic();
+    } catch (error) {
+      console.log("Error");
     }
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
+  }, [true]);
 
   const ShowModal = () => setOpen(true);
 
@@ -143,7 +145,7 @@ export function Header() {
                 <a href="/" className="text-secondary text-4xl font-bold">
                   Footwear
                 </a>
-                <MobileNavigation ShowModal={ShowModal} />
+                <MobileNavigation cartLength={data?.results?.length} ShowModal={ShowModal} />
               </div>
             </div>
             <div className="mb-5 md:mb-0">
@@ -178,7 +180,7 @@ export function Header() {
                       <FaShoppingCart />
                     </div>
                     <p className="mx-2">CART</p>
-                    <p>[0]</p>
+                    <p>[{data?.results?.length || 0}]</p>
                   </div>
                 </Link>
               </li>
