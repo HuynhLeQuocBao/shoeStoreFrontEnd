@@ -24,7 +24,6 @@ export function Login() {
   const onSubmit = async (data) => {
     const ok = await signIn("credentials", {
       ...data,
-      redirect: false,
     });
 		console.log(ok);
     if (!ok) {

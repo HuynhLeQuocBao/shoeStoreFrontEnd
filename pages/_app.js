@@ -8,9 +8,6 @@ import { MainLayout } from '@/layout/index';
 import axiosClient from '../apiClient/axiosClient';
 import Head from 'next/head';
 import App from 'next/app';
-import axios from 'axios';
-import Script from 'next/script';
-import { normalizeSettingsData } from '@/utils/normalization/normalizeSettingsData';
 
 function MyApp(props) {
   const { Component, pageProps, session } = props;
@@ -28,7 +25,6 @@ function MyApp(props) {
         <title>Footwear</title>
         <meta property='og:title' content='Footwear' key='title' />
         <link rel='shortcut icon' href='/favicon.png' />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       </Head>
 
       <SWRConfig
@@ -52,19 +48,8 @@ function MyApp(props) {
 MyApp.getInitialProps = async (context) => {
   const appProps = await App.getInitialProps(context);
   const session = await getSession(context);
-  const isSever = typeof window === 'undefined';
 
-  let settings;
-  try {
-    const result = await axios.get(
-      `${isSever ? process.env.API_URL : ''}/api/setting`
-    );
-    settings = normalizeSettingsData(result.data?.data || []);
-  } catch (error) {
-    settings = {};
-  }
-
-  return { ...appProps, session, settings };
+  return { ...appProps, session };
 };
 
 export default MyApp;

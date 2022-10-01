@@ -5,13 +5,19 @@ import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useRouter } from 'next/router';
 import Slider from "react-slick";
+import { useSession } from "next-auth/react";
+import { cartApi } from "@/apiClient/cartAPI";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function ProductDetail() {
 
   const [data, setData] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState(null);
+  const [width, setWidth] = useState(null);
   const [content, setContent] = useState(1);
-
+  const { data: session } = useSession();
   const router = useRouter();
   const productId = router.query.slug;
 
@@ -24,10 +30,15 @@ export function ProductDetail() {
     slidesToShow: 1,
     slidesToScroll: 1,
     pauseOnHover: false,
-};
+  };
 
   const handleAsc = () => {
-    setQuantity(quantity++);
+    if(quantity < 1) {
+      setQuantity(1);
+    }
+    else {
+      setQuantity(quantity + 1);
+    }
   }
 
   const handleDesc = () => {
@@ -35,7 +46,41 @@ export function ProductDetail() {
       setQuantity(1);
     }
     else {
-      setQuantity(quantity--);
+      setQuantity(quantity - 1);
+    }
+  }
+
+  const addToCart = async () => {
+    if(session) {
+      if(quantity <= 0) {
+        toast.warn('Quantity must be larger zero !', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+      else if(size === null) {
+        toast.warn('Please choose size !', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+      else {
+        const result = await cartApi.addCart({"productId":productId[0], "quantity":quantity, "size":size});
+        if(result) {
+          toast.success('Success Add to Cart !', {
+            position: toast.POSITION.TOP_RIGHT
+          });
+          setTimeout(() => {
+            router.reload(window.location.pathname)
+          }, 2000);
+        }
+      }
+    }
+    else {
+      toast.warn('Please login to add cart !', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
     }
   }
 
@@ -50,10 +95,10 @@ export function ProductDetail() {
       console.log("Error");
     }
   }, []);
-  console.log(data);
 
   return (
     <Container>
+      <ToastContainer />
       <div className="grid grid-cols-1 xl:grid-cols-8 md:gap-12 mx-6 md:mx-0 py-24">
         <div className="mb-8 col-span-5">
           <Slider {...settings}>
@@ -70,20 +115,20 @@ export function ProductDetail() {
           {
             <div className="flex flex-col justify-between">
               <h2 className="mb-4 text-xl font-semibold">{data.name}</h2>
-              <h3 className="mb-2 text-lg">${data.price}</h3>
+              <h3 className="mb-2 text-lg">${parseFloat(data.price).toFixed(2)}</h3>
               <h3 className="mb-4 text-xs">RATING</h3>
               <p className="text-sm text-secondary font-light text-justify">{data.introduce}</p>
               <div className="w-full mt-4 mb-8">
                 <h3 className="pb-2">SIZE</h3>
                 {
                   data?.size?.map((item, index) => (
-                    <button className="w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer" key={index}>{item.size}</button>
+                    <button onClick={() => setSize(item.size)} className={`w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm  text-white cursor-pointer ${size === item.size ? "bg-primary" : "bg-[#ccc]"}`} key={index}>{item.size}</button>
                   ))
                 }
                 <h3 className="pb-2">WIDTH</h3>
                 {
                   widths.map((item, index) => (
-                    <button className="w-10 h-10 mr-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer" key={index}>{item}</button>
+                    <button onClick={() => setWidth(item)} className={`w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm  text-white cursor-pointer ${width === item ? "bg-primary" : "bg-[#ccc]"}`} key={index}>{item}</button>
                   ))
                 }
               </div>
@@ -92,13 +137,16 @@ export function ProductDetail() {
                   <button className="w-10 h-10 mr-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer"
                     onClick={handleDesc} > -
                   </button>
-                  <input onChange={(e)=> setQuantity(e.target.value) } className="text-center w-16 h-full outline-none" type="text" value={quantity} />
+                  <input onChange={(e)=> setQuantity(e.target.value) } className="text-center w-16 h-full outline-none" type="number" min="1" value={quantity} />
                   <button className="w-10 h-10 mr-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer"
                     onClick={handleAsc} > +
                   </button>
                 </div>
                 <div>
-                  <button className="flex flex-row items-center w-fit hover:bg-primary rounded-sm bg-secondary text-white px-3 py-2">
+                  <button 
+                    className="flex flex-row items-center w-fit hover:bg-primary rounded-sm bg-secondary text-white px-3 py-2"
+                    onClick={addToCart}
+                  >
                     <div className="text-xl">
                       <FaShoppingCart />
                     </div>
@@ -107,6 +155,7 @@ export function ProductDetail() {
                 </div>
               </div>
             </div>
+            
           }
         </div>
       </div>
