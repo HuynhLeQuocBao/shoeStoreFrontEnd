@@ -18,8 +18,6 @@ export default NextAuth({
 							password: credentials.password,
 						}
 					);
-					console.log("Result", result.data.user);
-
 					if (result) return result.data;
 					else {
 						return null;
@@ -45,7 +43,8 @@ export default NextAuth({
 		async jwt({ token, user, account }) {
 			try {
 				// facebook & google
-				if (account.provider != "credentials" && user) {
+				// console.log("User", user);
+				if (account.provider != "credentials") {
 					const result = await axios.post(
 						`${process.env.API_URL}/api/v1/auth/${account.provider}`,
 						{
@@ -56,16 +55,16 @@ export default NextAuth({
 						}
 					);
 					token.accessToken = result.data.token.accessToken;
-					// token.expAccessToken = result.data.expires_at;
 					token.user = result.data.newUser || result.data.userUpdated;
+					token.expAccessToken = result.data.expired_at;
 				} else {
 					// credentials
 					token.accessToken = user.tokens.accessToken;
 					token.user = user.user;
+					token.expAccessToken = user.expired_at;
 				}
 				return token;
 			} catch (error) {
-				// console.log(error);
 				// console.log(error?.response?.data);
 				// return {
 				// 	isError: true,
@@ -79,7 +78,8 @@ export default NextAuth({
 			}
 			session.accessToken = token.accessToken;
 			session.user = token.user;
-			// session.expires = new Date(token.expAccessToken).toISOString();
+			session.expires = new Date(token.expAccessToken).toISOString();
+			console.log("Session", session);
 			return session;
 		},
 	},
