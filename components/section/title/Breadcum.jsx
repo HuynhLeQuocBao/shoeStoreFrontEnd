@@ -51,7 +51,7 @@ export function Breadcum() {
       <div className="py-3 mx-4 md:mx-0 text-base font-Rokkitt text-primary">
 
         <Link href="/">
-          <div className="cursor-pointer uppercase">
+          <div className="cursor-pointer uppercase max-w-fit">
             Home / 
             {navigation.map((item) => {
               if (router.pathname === item.href) {

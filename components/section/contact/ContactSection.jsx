@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { motion } from 'framer-motion';
 import { Container } from '@/components/common/index';
+import { useForm } from 'react-hook-form';
+import Link from "next/link";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { MdLocationOn, MdPhoneEnabled, MdSend, MdOutlineSupport } from "react-icons/md";
 
 export function ContactSection() {
@@ -22,6 +25,20 @@ export function ContactSection() {
       content: "yoursite.com",
     }
   ];
+
+	const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    toast.success('Success Add to Cart !', {
+      position: toast.POSITION.TOP_RIGHT
+    });
+    console.log(data)
+  };
+
   return (
     <Container>
       <div className="mx-4 md:mx-0">
@@ -30,38 +47,38 @@ export function ContactSection() {
         </div>
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-16">
           {contact.map((item,index)=>(
-            <div className="flex items-center text-base test-[#595959] font-light mb-2 md:mb-0">
+            <div key={index} className="flex items-center text-base test-[#595959] font-light mb-2 md:mb-0">
               <div className="h-5 w-5">{item.icon}</div>
-              <a key={index} className="ml-2">{item.content}</a>
+              <a className="ml-2">{item.content}</a>
             </div>
           ))}
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
             <div className="bg-[#f5f5f5] p-4 md:p-8">
               <h3 className="text-3xl mb-4">Get In Touch</h3>
-              <form method='post' action='/'>
+              <form method='post' onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col justify-evenly text-base text-secondary">
                   <div className="flex flex-col md:flex-row justify-between mb-4">
                     <div className="flex flex-col mb-4 md:mb-0">
-                      <label className="cursor-pointer" for="firstname" >First Name</label>
-                      <input className="px-3 py-2 mt-2" id='firstname' type="text" placeholder='Your firstname'/>
+                      <label className="cursor-pointer" htmlFor="firstname" >First Name</label>
+                      <input className="px-3 py-2 mt-2" id='firstname' {...register('firstname')} type="text" placeholder='Your firstname'/>
                     </div>
                     <div className="flex flex-col mb-4 md:mb-0">
-                      <label className="cursor-pointer" for="lastname">Last Name</label>
-                      <input className="px-3 py-2 mt-2" id='lastname' type="text" placeholder='Your lastname'/>
+                      <label className="cursor-pointer" htmlFor="lastname">Last Name</label>
+                      <input className="px-3 py-2 mt-2" id='lastname' {...register('lastname')} type="text" placeholder='Your lastname'/>
                     </div>
                   </div>
                   <div className="flex flex-col mb-4">
-                    <label className="cursor-pointer" for="email" >Email</label>
-                    <input className="px-3 py-2 mt-2" id='email' type="text" placeholder='Your email address'/>
+                    <label className="cursor-pointer" htmlFor="email" >Email</label>
+                    <input className="px-3 py-2 mt-2" id='email' {...register('email')} type="text" placeholder='Your email address'/>
                   </div>
                   <div className="flex flex-col mb-4">
-                    <label className="cursor-pointer" for="subject" >Subject</label>
-                    <input className="px-3 py-2 mt-2" id='subject' type="text" placeholder='Your subject of this message'/>
+                    <label className="cursor-pointer" htmlFor="subject" >Subject</label>
+                    <input className="px-3 py-2 mt-2" id='subject' {...register('subject')} type="text" placeholder='Your subject of this message'/>
                   </div>
                   <div className="flex flex-col mb-4">
-                    <label className="cursor-pointer" for="message" >Message</label>
-                    <textarea className="px-3 py-2 mt-2 h-60" id='message' type="text" placeholder='Say something about us'/>
+                    <label className="cursor-pointer" htmlFor="message" >Message</label>
+                    <textarea className="px-3 py-2 mt-2 h-60" id='message' {...register('message')} type="text" placeholder='Say something about us'/>
                   </div>
                   <div className="my-4 text-center md:text-left">
                     <button className="text-white bg-[#616161] rounded-[30px] hover:bg-primary px-3 py-2" type="submit">Send Message</button>
