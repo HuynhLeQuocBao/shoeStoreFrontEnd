@@ -7,6 +7,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
 import { getSession ,useSession, signIn, signOut } from "next-auth/react";
+import { cartApi } from "@/apiClient/cartAPI";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function Login() {
 	const { data: session, status } = useSession();
@@ -24,12 +27,18 @@ export function Login() {
   const onSubmit = async (data) => {
     const ok = await signIn("credentials", {
       ...data,
+			redirect: false,
     });
-		console.log(ok);
     if (!ok) {
-      alert("Incorrect account or password");
-			console.log(ok);
+			toast.error('Invalid email or password !', {
+				position: toast.POSITION.TOP_RIGHT
+			});
     }
+		else {
+			toast.success('Login Successfully !', {
+				position: toast.POSITION.TOP_RIGHT
+			});
+		}
   };
 
 

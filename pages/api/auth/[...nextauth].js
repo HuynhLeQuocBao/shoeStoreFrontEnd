@@ -1,29 +1,34 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import CredentialsProvider from 'next-auth/providers/credentials';
+import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
 import { authApi } from "@/apiClient/auth";
 
 export default NextAuth({
-
 	providers: [
 		CredentialsProvider({
-      type: 'credentials',
-      async authorize(credentials) {
-        try {
-          const result = await authApi.userLogin({
-            email: credentials.email,
-            password: credentials.password,
-          });
-					console.log(result);
+			id: "credentials",
+			async authorize(credentials) {
+				try {
+					const result = await axios.post(
+						`${process.env.API_URL}/api/v1/auth/login`,
+						{
+							email: credentials.email,
+							password: credentials.password,
+						}
+					);
+					console.log("Result", result.data.user);
 
-          return result;
-        } catch (error) {
-          return null;
-        }
-      },
-    }),
+					if (result) return result.data;
+					else {
+						return null;
+					}
+				} catch (error) {
+					return null;
+				}
+			},
+		}),
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -33,11 +38,14 @@ export default NextAuth({
 			clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
 		}),
 	],
+	session: {
+		strategy: "jwt",
+	},
 	callbacks: {
 		async jwt({ token, user, account }) {
 			try {
-				// Call multiple if use useSession
-				if (user) {
+				// facebook & google
+				if (account.provider != "credentials" && user) {
 					const result = await axios.post(
 						`${process.env.API_URL}/api/v1/auth/${account.provider}`,
 						{
@@ -47,32 +55,31 @@ export default NextAuth({
 							picture: user.image,
 						}
 					);
-
-					console.log("Data", result.data);
-
-					token.accessToken = result.data.token;
+					token.accessToken = result.data.token.accessToken;
 					// token.expAccessToken = result.data.expires_at;
 					token.user = result.data.newUser || result.data.userUpdated;
+				} else {
+					// credentials
+					token.accessToken = user.tokens.accessToken;
+					token.user = user.user;
 				}
-
 				return token;
 			} catch (error) {
-				// console.log("error", error);
-				console.log(error?.response?.data);
-				return {
-					isError: true,
-				};
+				// console.log(error);
+				// console.log(error?.response?.data);
+				// return {
+				// 	isError: true,
+				// };
+				return token;
 			}
 		},
 		async session({ session, token }) {
 			if (token.isError) {
 				return null;
 			}
-
 			session.accessToken = token.accessToken;
 			session.user = token.user;
 			// session.expires = new Date(token.expAccessToken).toISOString();
-
 			return session;
 		},
 	},
