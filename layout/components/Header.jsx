@@ -42,7 +42,7 @@ function MenuIconCloseSVG() {
   return <img src="images/svg/close.svg" />;
 }
 
-function MobileNavigation({ cartLength }) {
+function MobileNavigation({ cartLength, ShowModal }) {
   const router = useRouter();
 
   return (
@@ -98,8 +98,8 @@ function MobileNavigation({ cartLength }) {
                     </div>
                   </Link>
                 </li>
-                <li onClick={close}>
-                  <MenuProfile />
+                <li >
+                  <MenuProfile ShowModal={ShowModal} />
                 </li>
               </Popover.Panel>
             </Transition.Child>
@@ -185,7 +185,7 @@ export function Header() {
                 </Link>
               </li>
               <li>
-                <MenuProfile />
+                <MenuProfile ShowModal={ShowModal} />
               </li>
             </ul>
           </div>
