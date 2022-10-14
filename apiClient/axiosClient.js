@@ -2,7 +2,7 @@ import axios from "axios";
 import { getSession } from "next-auth/react";
 
 const axiosClient = axios.create({
-	baseURL: "/api/v1",
+	baseURL: "/api/v1/",
 	timeout: 30000,
 	headers: {
 		Accept: "application/json",
