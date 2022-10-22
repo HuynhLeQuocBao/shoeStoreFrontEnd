@@ -77,7 +77,6 @@ export default NextAuth({
 			session.accessToken = token.accessToken;
 			session.user = token.user;
 			session.expires = new Date(token.expAccessToken).toISOString();
-			console.log("Session", session);
 			return session;
 		},
 	},

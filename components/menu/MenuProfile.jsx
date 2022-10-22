@@ -7,6 +7,7 @@ import { FaUserAlt } from "react-icons/fa";
 
 export function MenuProfile() {
 	const { data: session } = useSession();
+	console.log("Session : ",session?.user?.fullname);
 
 	return (
 		<Menu as="div" className="relative">
@@ -28,7 +29,7 @@ export function MenuProfile() {
 						<div className="flex items-center hover:text-primary focus:text-primary text-base">
 							<span className="mx-2 uppercase">{session?.user?.fullname}</span>
 							<div className="w-10 h-10">
-								<img src={`${session?.user?.picture}`} alt="" className="w-full rounded-full" />
+								<img src={`${session?.user?.picture || "/images/logo/admin.png" }`} alt="" className="w-full rounded-full" />
 							</div>
 						</div>
 					)
