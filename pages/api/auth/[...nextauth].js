@@ -42,8 +42,6 @@ export default NextAuth({
 	callbacks: {
 		async jwt({ token, user, account }) {
 			try {
-				// facebook & google
-				// console.log("User", user);
 				if (account.provider != "credentials") {
 					const result = await axios.post(
 						`${process.env.API_URL}/api/v1/auth/${account.provider}`,
@@ -54,7 +52,7 @@ export default NextAuth({
 							picture: user.image,
 						}
 					);
-					token.accessToken = result.data.token.accessToken;
+					token.accessToken = result.data.token;
 					token.user = result.data.newUser || result.data.userUpdated;
 					token.expAccessToken = result.data.expired_at;
 				} else {
