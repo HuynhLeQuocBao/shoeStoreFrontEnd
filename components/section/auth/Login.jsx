@@ -6,7 +6,7 @@ import * as yup from "yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
-import { getSession ,useSession, signIn, signOut } from "next-auth/react";
+import { getSession, useSession, signIn, signOut } from "next-auth/react";
 import { cartApi } from "@/apiClient/cartAPI";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,32 +14,32 @@ import 'react-toastify/dist/ReactToastify.css';
 export function Login() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
-	if(session) {
+	if (session) {
 		router.push("/");
 	}
 
 	const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
 
-  const onSubmit = async (data) => {
-    const ok = await signIn("credentials", {
-      ...data,
+	const onSubmit = async (data) => {
+		const ok = await signIn("credentials", {
+			...data,
 			redirect: false,
-    });
-    if (!ok) {
-			toast.error('Invalid email or password !', {
+		});
+		if (!ok) {
+			toast.error('Invalid account name or password !', {
 				position: toast.POSITION.TOP_RIGHT
 			});
-    }
+		}
 		else {
 			toast.success('Login Successfully !', {
 				position: toast.POSITION.TOP_RIGHT
 			});
 		}
-  };
+	};
 
 
 	return (
@@ -51,15 +51,15 @@ export function Login() {
 				<form method="post" onSubmit={handleSubmit(onSubmit)} className="w-1/2">
 					<div className="flex flex-col text-base text-secondary">
 						<div className="flex flex-col mb-4">
-							<label className="cursor-pointer" htmlFor="email">
-								Email
+							<label className="cursor-pointer" htmlFor="account">
+								Account Name
 							</label>
 							<input
 								className="px-3 py-2 mt-2 border border-black"
-								id="email"
-								{...register('email', { required: true })} 
+								id="account"
+								{...register('accountName', { required: true })}
 								type="text"
-								placeholder="Enter your email"
+								placeholder="Enter your account name"
 							/>
 						</div>
 						<div className="flex flex-col mb-4">
@@ -69,7 +69,7 @@ export function Login() {
 							<input
 								className="px-3 py-2 mt-2 border border-black"
 								id="password"
-								{...register('password', { required: true })} 
+								{...register('password', { required: true })}
 								type="password"
 								placeholder="Enter your password"
 							/>
@@ -92,7 +92,7 @@ export function Login() {
 									type="submit"
 									onClick={() => signIn("facebook")}
 								>
-									<img src="/images/logo/facebook.png" alt="" className="w-full"/>
+									<img src="/images/logo/facebook.png" alt="" className="w-full" />
 								</button>
 							</div>
 							<div className="px-4 text-xl">
@@ -104,7 +104,7 @@ export function Login() {
 									type="submit"
 									onClick={() => signIn("google")}
 								>
-									<img src="/images/logo/google.png" alt="" className="w-full"/>
+									<img src="/images/logo/google.png" alt="" className="w-full" />
 								</button>
 							</div>
 						</div>

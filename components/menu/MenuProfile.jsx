@@ -7,33 +7,32 @@ import { FaUserAlt } from "react-icons/fa";
 
 export function MenuProfile() {
 	const { data: session } = useSession();
-	console.log("Session : ",session?.user?.fullname);
 
 	return (
 		<Menu as="div" className="relative">
 			<div className="flex items-center space-x-2 justify-center lg:justify-start cursor-pointer">
 				<Menu.Button as={session ? "button" : "div"}>
-				{
-					!session
-					? (
-						<Link href="/login">
-							<div className="flex items-center hover:text-primary focus:text-primary text-base">
-								<div className="m-auto text-2xl">
-									<FaUserAlt />
+					{
+						!session
+							? (
+								<Link href="/login">
+									<div className="flex items-center hover:text-primary focus:text-primary text-base">
+										<div className="m-auto text-2xl">
+											<FaUserAlt />
+										</div>
+										<span className="mx-2">LOG IN</span>
+									</div>
+								</Link>
+							)
+							: (
+								<div className="flex items-center hover:text-primary focus:text-primary text-base">
+									<span className="mx-2 uppercase">{session?.user?.fullname}</span>
+									<div className="w-10 h-10">
+										<img src={`${session?.user?.picture || "/images/logo/admin.png"}`} alt="" className="w-full rounded-full" />
+									</div>
 								</div>
-								<span className="mx-2">LOG IN</span>
-							</div>
-						</Link>
-					)
-					: (
-						<div className="flex items-center hover:text-primary focus:text-primary text-base">
-							<span className="mx-2 uppercase">{session?.user?.fullname}</span>
-							<div className="w-10 h-10">
-								<img src={`${session?.user?.picture || "/images/logo/admin.png" }`} alt="" className="w-full rounded-full" />
-							</div>
-						</div>
-					)
-				}
+							)
+					}
 				</Menu.Button>
 			</div>
 			{session && (
@@ -48,26 +47,26 @@ export function MenuProfile() {
 				>
 					<Menu.Items className="origin-top-right absolute right-0 mt-2 w-full overflow-hidden rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
 						<Menu.Item>
-								<button
-									className="w-full p-2 hover:bg-gray-100"
-								>
-									My orders
-								</button>
+							<button
+								className="w-full p-2 hover:bg-gray-100"
+							>
+								My orders
+							</button>
 						</Menu.Item>
 						<Menu.Item>
-								<button
-									className="w-full p-2 hover:bg-gray-100"
-								>
-									My profile
-								</button>
+							<button
+								className="w-full p-2 hover:bg-gray-100"
+							>
+								My profile
+							</button>
 						</Menu.Item>
 						<Menu.Item>
-								<button
-									className="w-full p-2 hover:bg-gray-100"
-									onClick={() => signOut()}
-								>
-									Log out
-								</button>
+							<button
+								className="w-full p-2 hover:bg-gray-100"
+								onClick={() => signOut()}
+							>
+								Log out
+							</button>
 						</Menu.Item>
 					</Menu.Items>
 				</Transition>

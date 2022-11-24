@@ -10,7 +10,6 @@ export default function Index() {
   return (
     <>
       <Banner />
-      <Title />
       <Gender />
       <BestSeller />
     </>

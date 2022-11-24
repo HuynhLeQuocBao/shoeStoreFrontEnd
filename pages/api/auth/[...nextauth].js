@@ -14,7 +14,7 @@ export default NextAuth({
 					const result = await axios.post(
 						`${process.env.API_URL}/api/v1/auth/login`,
 						{
-							email: credentials.email,
+							accountName: credentials.accountName,
 							password: credentials.password,
 						}
 					);

@@ -1,8 +1,8 @@
 import axiosClient from "./axiosClient";
 
 export const authApi = {
-	userLogin(data) {
-		return axiosClient.post("auth/login", data);
+	registerUser(data) {
+		return axiosClient.post("auth/register", data);
 	},
 	verifyToken(data) {
 		return axiosClient.post("auth/verifyToken", data);
