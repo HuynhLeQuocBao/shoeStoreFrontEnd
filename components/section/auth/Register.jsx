@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 const isVNMobilePhone =
 	/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/;
@@ -38,6 +39,8 @@ const schema = yup.object().shape({
 
 export function Register() {
 
+	const router = useRouter();
+
 	const {
 		register,
 		control,
@@ -50,13 +53,20 @@ export function Register() {
 	});
 
 	const onSubmitRegister = async (data) => {
-		console.log(data);
 		const ok = await authApi.registerUser(data);
-		console.log(ok);
+		if (ok) {
+			toast.success('Register Successfully !', {
+				position: toast.POSITION.TOP_RIGHT
+			});
+			setTimeout(() => {
+				router.push("/login");
+			}, 3000);
+		}
 	};
 
 	return (
 		<Container>
+			<ToastContainer />
 			<div className="mx-4 md:mx-0 font-Rokkitt flex flex-col items-center">
 				<div className="text-4xl font-bold text-center w-1/2">
 					<h2>Register</h2>

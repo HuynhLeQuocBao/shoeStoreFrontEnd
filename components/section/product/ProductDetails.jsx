@@ -15,13 +15,10 @@ export function ProductDetail() {
   const [data, setData] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null);
-  const [width, setWidth] = useState(null);
   const [content, setContent] = useState(1);
   const { data: session } = useSession();
   const router = useRouter();
   const productId = router.query.slug;
-
-  const widths = ["M", "W"];
 
   const settings = {
     dots: true,
@@ -33,7 +30,7 @@ export function ProductDetail() {
   };
 
   const handleAsc = () => {
-    if(quantity < 1) {
+    if (quantity < 1) {
       setQuantity(1);
     }
     else {
@@ -42,7 +39,7 @@ export function ProductDetail() {
   }
 
   const handleDesc = () => {
-    if(quantity <= 1) {
+    if (quantity <= 1) {
       setQuantity(1);
     }
     else {
@@ -51,20 +48,20 @@ export function ProductDetail() {
   }
 
   const addToCart = async () => {
-    if(session) {
-      if(quantity <= 0) {
+    if (session) {
+      if (quantity <= 0) {
         toast.warn('Quantity must be larger zero !', {
           position: toast.POSITION.TOP_RIGHT
         });
       }
-      else if(size === null) {
+      else if (size === null) {
         toast.warn('Please choose size !', {
           position: toast.POSITION.TOP_RIGHT
         });
       }
       else {
-        const result = await cartApi.addCart({"productId":productId[0], "quantity":quantity, "size":size});
-        if(result) {
+        const result = await cartApi.addCart({ "productId": productId[0], "quantity": quantity, "size": size });
+        if (result) {
           toast.success('Success Add to Cart !', {
             position: toast.POSITION.TOP_RIGHT
           });
@@ -125,25 +122,19 @@ export function ProductDetail() {
                     <button onClick={() => setSize(item.size)} className={`w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm  text-white cursor-pointer ${size === item.size ? "bg-primary" : "bg-[#ccc]"}`} key={index}>{item.size}</button>
                   ))
                 }
-                <h3 className="pb-2">WIDTH</h3>
-                {
-                  widths.map((item, index) => (
-                    <button onClick={() => setWidth(item)} className={`w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm  text-white cursor-pointer ${width === item ? "bg-primary" : "bg-[#ccc]"}`} key={index}>{item}</button>
-                  ))
-                }
               </div>
               <div className="grid grid-cols-2 text-xl mb-8">
                 <div className="">
                   <button className="w-10 h-10 mr-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer"
                     onClick={handleDesc} > -
                   </button>
-                  <input onChange={(e)=> setQuantity(e.target.value) } className="text-center w-16 h-full outline-none" type="number" min="1" value={quantity} />
+                  <input onChange={(e) => setQuantity(e.target.value)} className="text-center w-16 h-full outline-none" type="number" min="1" value={quantity} />
                   <button className="w-10 h-10 mr-1 hover:bg-primary rounded-sm bg-[#ccc] text-white cursor-pointer"
                     onClick={handleAsc} > +
                   </button>
                 </div>
                 <div>
-                  <button 
+                  <button
                     className="flex flex-row items-center w-fit hover:bg-primary rounded-sm bg-secondary text-white px-3 py-2"
                     onClick={addToCart}
                   >
@@ -155,37 +146,37 @@ export function ProductDetail() {
                 </div>
               </div>
             </div>
-            
+
           }
         </div>
       </div>
       <div className="text-justify mx-6 md:mx-0">
         <div className="grid grid-cols-3 gap-1 w-fit text-sm md:text-base text-black">
-          <button onClick={()=>setContent(1)} className={`${content == 1 ? "bg-secondary text-white" : "bg-[#F2F2F2]"} hover:bg-secondary focus:bg-secondary hover:text-white focus:text-white rounded-sm px-3 py-2`}>
-          Description
+          <button onClick={() => setContent(1)} className={`${content == 1 ? "bg-secondary text-white" : "bg-[#F2F2F2]"} hover:bg-secondary focus:bg-secondary hover:text-white focus:text-white rounded-sm px-3 py-2`}>
+            Description
           </button>
-          <button onClick={()=>setContent(2)} className={`${content == 2 ? "bg-secondary text-white" : "bg-[#F2F2F2]"} hover:bg-secondary focus:bg-secondary hover:text-white focus:text-white rounded-sm px-3 py-2`}>
-          Manufacturer
+          <button onClick={() => setContent(2)} className={`${content == 2 ? "bg-secondary text-white" : "bg-[#F2F2F2]"} hover:bg-secondary focus:bg-secondary hover:text-white focus:text-white rounded-sm px-3 py-2`}>
+            Manufacturer
           </button>
-          <button onClick={()=>setContent(3)} className={`${content == 3 ? "bg-secondary text-white" : "bg-[#F2F2F2]"} hover:bg-secondary focus:bg-secondary hover:text-white focus:text-white rounded-sm px-3 py-2`}>
-          Review
+          <button onClick={() => setContent(3)} className={`${content == 3 ? "bg-secondary text-white" : "bg-[#F2F2F2]"} hover:bg-secondary focus:bg-secondary hover:text-white focus:text-white rounded-sm px-3 py-2`}>
+            Review
           </button>
         </div>
-          {content == 1 && 
-            <div className="w-full border border-[#dee2e6] mt-4 px-8 py-8">
-              <h3 className="text-sm text-secondary pb-6">{data?.description}</h3>
-            </div>
-          }
-          {content == 2 && 
-            <div className="w-full border border-[#dee2e6] mt-4 px-8 py-8">
-              <h3 className="text-sm text-secondary pb-6">Chưa có API Manufacturer</h3>
-            </div>
-          }
-          {content == 3 && 
-            <div className="w-full border border-[#dee2e6] mt-4 px-8 py-8">
-              <h3 className="text-sm text-secondary pb-6">Chưa có API Review</h3>
-            </div>
-          }
+        {content == 1 &&
+          <div className="w-full border border-[#dee2e6] mt-4 px-8 py-8">
+            <h3 className="text-sm text-secondary pb-6">{data?.description}</h3>
+          </div>
+        }
+        {content == 2 &&
+          <div className="w-full border border-[#dee2e6] mt-4 px-8 py-8">
+            <h3 className="text-sm text-secondary pb-6">Chưa có API Manufacturer</h3>
+          </div>
+        }
+        {content == 3 &&
+          <div className="w-full border border-[#dee2e6] mt-4 px-8 py-8">
+            <h3 className="text-sm text-secondary pb-6">Chưa có API Review</h3>
+          </div>
+        }
       </div>
     </Container>
   );

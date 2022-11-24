@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
-
+import { useSession } from "next-auth/react";
 import { Container } from "@/components/common/index";
 import { MenuItem, MenuProfile } from "@/components/menu/index";
 import { FaShoppingCart } from "react-icons/fa";
@@ -42,8 +42,10 @@ function MenuIconCloseSVG() {
   return <img src="images/svg/close.svg" />;
 }
 
+
 function MobileNavigation({ cartLength, ShowModal }) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   return (
     <Popover className="ml-auto md:hidden">
@@ -88,7 +90,7 @@ function MobileNavigation({ cartLength, ShowModal }) {
                   </li>
                 ))}
                 <li onClick={close}>
-                  <Link href="/shopping-cart" className="cursor-pointer">
+                  <Link href={session ? "/shopping-cart" : "/login"} className="cursor-pointer">
                     <div className="flex flex-row  text-white md:text-black font-Rokkitt font-normal hover:text-primary focus:text-primary">
                       <div className="text-2xl">
                         <FaShoppingCart />
@@ -113,9 +115,11 @@ function MobileNavigation({ cartLength, ShowModal }) {
 
 export function Header() {
   const router = useRouter();
+  const { data: session } = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  console.log(session)
 
   useEffect(() => {
     try {
@@ -174,7 +178,7 @@ export function Header() {
             </ul>
             <ul className="flex items-center my-2 mr-3">
               <li className="my-2 mr-8">
-                <Link href="/shopping-cart">
+                <Link href={session ? "/shopping-cart" : "/login"}>
                   <div className="flex flex-row cursor-pointer text-black hover:text-primary focus:text-primary">
                     <div className="m-auto text-2xl">
                       <FaShoppingCart />
