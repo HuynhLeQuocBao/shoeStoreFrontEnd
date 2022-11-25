@@ -11,6 +11,8 @@ import { HiOutlineX } from "react-icons/hi";
 export function ShoppingCart() {
     const [dataCart, setDataCart] = useState([])
     const [checkDelete, setCheckDelete] = useState(false)
+    const [check, setCheck] = useState(false)
+    const [totalItem, setTotalItem] = useState([])
     const [subTotal, setSubTotal] = useState(0)
     useEffect(() => {
         try {
@@ -19,13 +21,18 @@ export function ShoppingCart() {
                 console.log('cart', data)
                 setDataCart(data?.results)
                 setSubTotal(data?.totalCart)
+                // data?.results.map((item) => setTotalItem((prev) => [...prev, item.productPrice * item.quantity]))
+                setCheck(false)
             };
             fetchCart();
+
         } catch (error) {
             console.log("Error");
         }
-    }, [checkDelete]);
-
+    }, [checkDelete, check]);
+    useEffect(() => {
+        console.log('totalItem', totalItem)
+    }, [totalItem,])
     const handleDeleteItemCart = (id) => {
         const fetchDeleteCart = async () => {
             try {
@@ -36,8 +43,15 @@ export function ShoppingCart() {
             }
         };
         fetchDeleteCart();
+        setCheckDelete(false)
     }
-    console.log('aaaaaa', dataCart)
+    const updateFieldChanged = value => {
+        let newArr = totalItem
+        newArr[value.index] = value.total
+        console.log(newArr[index])
+        setTotalItem(newArr);
+        setCheck(true)
+    }
     return (
         <Container>
             <ProgressCart />
@@ -62,7 +76,7 @@ export function ShoppingCart() {
                         <span>REMOVE</span>
                     </div>
                 </div>
-                {dataCart.length > 0 ?
+                {dataCart?.length > 0 ?
                     dataCart.map((item, index) => {
                         return (
                             <div key={index} className='w-full text-sm grid grid-cols-12  border border-b-2 shadow-lg rounded-lg hover:bg-zinc-100 duration-500 py-1 mb-2'>
@@ -79,7 +93,15 @@ export function ShoppingCart() {
                                     <span>{item.size}</span>
                                 </div>
                                 <div className='text-center col-span-2 flex justify-center items-center'>
-                                    <FormQuantity quantity={item.quantity} cartId={item._id} productId={item.productId} size={item.size} />
+                                    <FormQuantity
+                                        quantity={item.quantity}
+                                        cartId={item._id}
+                                        productId={item.productId}
+                                        size={item.size}
+                                        index={index}
+                                        price={item.productPrice}
+                                        onTotal={value => setCheck(value)}
+                                    />
                                 </div>
                                 <div className='col-span-1  text-center flex justify-center items-center'>
                                     <span>${item.total}</span>

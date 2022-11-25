@@ -198,15 +198,14 @@ export function OrderDetail() {
                         >
                             Cancel
                         </button>
-                        // :
-                        // stateOrder && stateOrder === 2 ?
-                        //     <button
-                        //         className='w-1/2 md:w-1/6 py-2 rounded-2xl bg-green-400 cursor-pointer hover:bg-green-600 font-bold duration-500 hover:text-white'
-                        //         onClick={fetchConfirmOrder}
-                        //     >
-                        //         Confirm
-                        //     </button>
-                        : null
+                        : stateOrder === 2 ?
+                            <button
+                                className='w-1/2 md:w-1/6 py-2 rounded-2xl bg-green-400 cursor-pointer hover:bg-green-600 font-bold duration-500 hover:text-white'
+                                onClick={fetchConfirmOrder}
+                            >
+                                Confirm
+                            </button>
+                            : null
                 }
 
 

@@ -62,15 +62,22 @@ export function ProductDetail() {
         });
       }
       else {
-        const result = await cartApi.addCart({ "productId": productId[0], "quantity": quantity, "size": size });
-        if (result) {
-          toast.success('Success Add to Cart !', {
+        try {
+          const result = await cartApi.addCart({ "productId": productId[0], "quantity": quantity, "size": size });
+          if (result) {
+            toast.success('Success Add to Cart !', {
+              position: toast.POSITION.TOP_RIGHT
+            });
+            setTimeout(() => {
+              router.reload(window.location.pathname)
+            }, 100);
+          }
+        } catch (error) {
+          toast.error(error, {
             position: toast.POSITION.TOP_RIGHT
           });
-          setTimeout(() => {
-            router.reload(window.location.pathname)
-          }, 2000);
         }
+
       }
     }
     else {

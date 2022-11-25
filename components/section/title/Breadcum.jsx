@@ -52,7 +52,7 @@ export function Breadcum() {
 
         <Link href="/">
           <div className="cursor-pointer uppercase max-w-fit">
-            Home / 
+            Home /
             {navigation.map((item) => {
               if (router.pathname === item.href) {
                 return <span key={item.name} className="text-black ml-1">{item.name}</span>;

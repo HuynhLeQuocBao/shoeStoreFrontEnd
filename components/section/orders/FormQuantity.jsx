@@ -5,7 +5,7 @@ import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 
 export function FormQuantity({ ...props }) {
 	const [quantity, setQuantity] = useState(props.quantity);
-	const { cartId, productId, size } = props;
+	const { cartId, productId, size, price, index } = props;
 	const {
 		register,
 		control,
@@ -21,15 +21,12 @@ export function FormQuantity({ ...props }) {
 		} else {
 			setQuantity(quantity - 1);
 		}
+
 	};
 	const handleAdd = () => {
 		setQuantity(quantity + 1);
 	};
 	const onSubmit = () => {
-		// const dataForm = new FormData();
-		// dataForm.append("productId", productId);
-		// dataForm.append("quantity", quantity);
-		// dataForm.append("size", size);
 		const fetchUpdateCart = async () => {
 			try {
 				const result = await cartApi.updateCart(cartId, {
@@ -38,6 +35,7 @@ export function FormQuantity({ ...props }) {
 					size: size,
 				});
 				console.log({ result });
+				props.onTotal(true)
 			} catch (error) { }
 		};
 		fetchUpdateCart();

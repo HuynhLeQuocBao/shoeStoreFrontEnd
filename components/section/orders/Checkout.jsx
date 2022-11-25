@@ -47,7 +47,10 @@ export function Checkout() {
                 });
                 console.log(result)
                 if (result) {
-                    router.push('/order-complete')
+                    setTimeout(() => {
+                        router.push('/order-complete')
+                        router.reload(window.location.pathname)
+                    }, 500);
                 }
             };
             fetchCheckoutCart();

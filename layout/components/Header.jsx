@@ -10,6 +10,8 @@ import { MenuItem, MenuProfile } from "@/components/menu/index";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdSearch } from "react-icons/md";
 import { cartApi } from "@/apiClient/cartAPI";
+import { productApi } from "@/apiClient/product";
+import { useForm, Controller } from "react-hook-form";
 
 const navigation = [
   {
@@ -120,7 +122,15 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   console.log(session)
-
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    mode: "onChange",
+  });
   useEffect(() => {
     try {
       const fechPublic = async () => {
@@ -134,7 +144,10 @@ export function Header() {
   }, [true]);
 
   const ShowModal = () => setOpen(true);
-
+  const onSubmit = async (value) => {
+    console.log(value)
+    router.push(`/search-product/${value.search}`)
+  }
   return (
     <header
       className={clsx("md:sticky z-50 top-0 bg-white", {
@@ -153,13 +166,26 @@ export function Header() {
               </div>
             </div>
             <div className="mb-5 md:mb-0">
-              <form className="flex relative">
-                <input type="text" placeholder="Search" className="h-[40px] w-full rounded-[30px] pl-4 pr-[4.5rem] focus:outline-none overflow-hidden border" name="search" />
-                <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-secondary">
-                  <div className="text-2xl flex items-center justify-center">
-                    <MdSearch />
-                  </div>
-                </button>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Controller
+                  control={control}
+                  name="search"
+                  render={({ field }) => (
+                    <div className="flex relative">
+                      <input
+                        type="text"
+                        placeholder="Search"
+                        className="h-[40px] w-full rounded-[30px] pl-4 pr-[4.5rem] focus:outline-none overflow-hidden border"
+                        {...register("search")}
+                      />
+                      <button type="submit" className="w-[40px] h-[40px] rounded-full bg-primary text-white focus:outline-none absolute right-0 hover:bg-secondary">
+                        <div className="text-2xl flex items-center justify-center">
+                          <MdSearch />
+                        </div>
+                      </button>
+                    </div>
+                  )}
+                />
               </form>
             </div>
           </div>

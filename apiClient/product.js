@@ -6,5 +6,8 @@ export const productApi = {
   },
   getProductById(id) {
     return axiosClient.get(`/shoes/${id}`);
+  },
+  searchProducts(search) {
+    return axiosClient.get(`/shoes/displayAllProducts?search=${search}`);
   }
 };
