@@ -7,4 +7,10 @@ export const orderApi = {
     getOrderDetail(id) {
         return axiosClient.get(`/customer/myOrderDetail/${id}`);
     },
+    confirmOrder(id) {
+        return axiosClient.post(`/customer/confirmDelivered/${id}`);
+    },
+    deleteOrder(id) {
+        return axiosClient.delete(`/customer/cancelOrder/${id}`);
+    }
 };

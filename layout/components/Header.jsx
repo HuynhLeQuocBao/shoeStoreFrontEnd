@@ -48,7 +48,7 @@ function MobileNavigation({ cartLength, ShowModal }) {
   const { data: session } = useSession();
 
   return (
-    <Popover className="ml-auto md:hidden">
+    <Popover className="ml-auto md:hidden z-[9999]">
       {({ open, close }) => (
         <>
           <Popover.Button className="relative z-30 flex h-10 w-10 items-center justify-center [&:not(:focus-visible)]:focus:outline-none bg-primary outline-none rounded-2xl">

@@ -90,7 +90,7 @@ export function ListOrders() {
                                 </div>
                             </Link>
                         )) :
-                        <div>a</div>
+                        <div className='w-full text-sm border border-b-2 shadow-lg rounded-lg text-center duration-500 py-10 mb-2'>No data</div>
 
                 }
 

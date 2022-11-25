@@ -8,11 +8,17 @@ import Link from 'next/link';
 import { HiOutlineX } from "react-icons/hi";
 import { useRouter } from 'next/router'
 import { ProcessOrder } from './ProcessOrder';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function OrderDetail() {
     const router = useRouter()
     const [dataOrder, setDataOrder] = useState([])
     const [subTotal, setSubTotal] = useState(0)
+    const [idOrder, setIdOrder] = useState()
+    const [stateOrder, setStateOrder] = useState()
+    // const [confirm, se] = useState()
+
     useEffect(() => {
         try {
             const fetchCart = async () => {
@@ -22,14 +28,53 @@ export function OrderDetail() {
                 data.map((item) => total += item.quantity * item.price)
                 setSubTotal(total)
             };
+            const fetchOrder = async () => {
+
+                const getOrder = await orderApi.getAllOrder();
+                getOrder.map((item) => {
+                    if (item._id === parseInt(router.query.slug)) {
+                        setStateOrder(item.status)
+                    }
+                })
+            };
+            fetchOrder()
             fetchCart();
         } catch (error) {
-            console.log("Error");
+            return toast.error(error, {
+                position: toast.POSITION.TOP_RIGHT
+            });
         }
-    }, []);
+    }, [stateOrder]);
+    const fetchConfirmOrder = async () => {
+        try {
+            await orderApi.confirmOrder(router.query.slug)
+            setStateOrder(3)
+            return toast.success('Confirm successfully!', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+
+        } catch (error) {
+            toast.error(error, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
+    }
+    const fetchDeleteOrder = async () => {
+        try {
+            await orderApi.deleteOrder(router.query.slug)
+            toast.success('Cancel successfully!', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            router.push('/my-orders')
+        } catch (error) {
+            toast.error(error, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
+    }
     return (
         <Container>
-            <ProcessOrder />
+            <ProcessOrder status={stateOrder} />
             <div className='hidden md:block w-full mb-10'>
                 <div className='w-full bg-[#f0f0f0] py-3 font-semibold text-base rounded-3xl items-center justify-center uppercase grid grid-cols-12 mb-6 shadow-lg'>
                     <div className='text-center col-span-5'>
@@ -145,12 +190,28 @@ export function OrderDetail() {
                 </div>
             </div>
             <div className='w-full my-10 flex justify-center items-center'>
-                <Link href='/checkout'>
-                    <button className='w-1/2 md:w-1/6 py-2 rounded-2xl bg-slate-400 cursor-pointer hover:bg-red-400 font-bold duration-500 hover:text-white'>
-                        Cancel order
-                    </button>
-                </Link>
+                {
+                    stateOrder === 0 ?
+                        <button
+                            className='w-1/2 md:w-1/6 py-2 rounded-2xl bg-slate-400 cursor-pointer hover:bg-red-400 font-bold duration-500 hover:text-white'
+                            onClick={fetchDeleteOrder}
+                        >
+                            Cancel
+                        </button>
+                        // :
+                        // stateOrder && stateOrder === 2 ?
+                        //     <button
+                        //         className='w-1/2 md:w-1/6 py-2 rounded-2xl bg-green-400 cursor-pointer hover:bg-green-600 font-bold duration-500 hover:text-white'
+                        //         onClick={fetchConfirmOrder}
+                        //     >
+                        //         Confirm
+                        //     </button>
+                        : null
+                }
+
+
             </div>
+            <ToastContainer />
         </Container>
     )
 
