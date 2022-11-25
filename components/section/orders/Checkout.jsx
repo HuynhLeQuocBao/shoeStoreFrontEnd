@@ -47,10 +47,10 @@ export function Checkout() {
         try {
             const fetchCheckoutCart = async () => {
                 const result = await cartApi.checkoutCart({
-                    fullname: fullname,
-                    address: address,
-                    numberPhone: numberphone,
-                    email: email,
+                    fullname: data.fullname,
+                    address: data.address,
+                    numberPhone: data.numberPhone,
+                    email: data.email,
                 });
                 console.log(result)
                 if (result) {
@@ -88,8 +88,8 @@ export function Checkout() {
                                                 <input
                                                     id='fullname'
                                                     placeholder='Full Name'
-                                                    value={fullname}
-                                                    onChange={e => setFullname(e.target.value)}
+                                                    defaultValue={fullname}
+                                                    // onChange={e => setFullname(e.target.value)}
                                                     className='w-full p-4 rounded-xl my-2'
                                                     {...register("fullname")}
 
@@ -109,8 +109,8 @@ export function Checkout() {
                                             <input
                                                 id='address'
                                                 placeholder='Address'
-                                                value={address}
-                                                onChange={e => setAddress(e.target.value)}
+                                                defaultValue={address}
+                                                // onChange={e => setAddress(e.target.value)}
                                                 className='w-full p-4 rounded-xl my-2'
                                                 {...register("address")}
 
@@ -129,8 +129,8 @@ export function Checkout() {
                                             <input
                                                 id='phone'
                                                 placeholder='Number Phone'
-                                                value={numberphone}
-                                                onChange={e => setNumberPhone(e.target.value)}
+                                                defaultValue={numberphone}
+                                                // onChange={e => setNumberPhone(e.target.value)}
                                                 className='w-full p-4 rounded-xl my-2'
                                                 {...register("numberPhone")}
                                             />
@@ -148,8 +148,8 @@ export function Checkout() {
                                             <input
                                                 id='email'
                                                 name='email'
-                                                value={email}
-                                                onChange={e => setEmail(e.target.value)}
+                                                defaultValue={email}
+                                                // onChange={e => setEmail(e.target.value)}
                                                 placeholder='Email'
                                                 className='w-full p-4 rounded-xl my-2'
                                                 {...register("email")}
