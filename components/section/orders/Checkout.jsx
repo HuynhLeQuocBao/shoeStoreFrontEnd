@@ -39,7 +39,12 @@ export function Checkout() {
     const onSubmit = (data) => {
         try {
             const fetchCheckoutCart = async () => {
-                const result = await cartApi.checkoutCart();
+                const result = await cartApi.checkoutCart({
+                    fullname: data.firstName + ' ' + data.lastName,
+                    address: data.address,
+                    numberPhone: data.numberPhone,
+                    email: data.email,
+                });
                 console.log(result)
                 if (result) {
                     router.push('/order-complete')
@@ -120,15 +125,15 @@ export function Checkout() {
                             <div className='w-full my-4'>
                                 <Controller
                                     control={control}
-                                    name='phone'
+                                    name='numberPhone'
                                     render={({ field, value }) => (
                                         <div>
                                             <label htmlFor='phone'>PHONE</label>
                                             <input
                                                 id='phone'
-                                                placeholder='Phone'
+                                                placeholder='Number Phone'
                                                 className='w-full p-4 rounded-xl my-2'
-                                                {...register("phone")}
+                                                {...register("numberPhone")}
                                             />
                                         </div>
                                     )}

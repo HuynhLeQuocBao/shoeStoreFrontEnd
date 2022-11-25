@@ -4,7 +4,6 @@ import { Breadcum } from "@/components/section/title";
 export default function MyOrder() {
     return (
         <div>
-            <Breadcum />
             <MyOrders />
         </div>
     )

@@ -147,7 +147,7 @@ export function ShoppingCart() {
             </div>
             <div className='w-full grid grid-cols-12'>
                 <div className='md:col-span-8'></div>
-                <div className='col-span-12 md:col-span-4 w-full'>
+                <div className='col-span-12 md:col-span-4 w-full shadow-lg'>
                     <div className='w-full bg-slate-200 p-4  rounded-lg '>
                         <div className='w-full mb-2 flex'>
                             <span className='w-[30%] flex justify-end'>Subtotal: </span>

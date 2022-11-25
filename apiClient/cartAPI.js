@@ -13,7 +13,7 @@ export const cartApi = {
     deleteCart(id) {
         return axiosClient.delete(`/customer/cart/delete/${id}`);
     },
-    checkoutCart() {
-        return axiosClient.post(`customer/checkout`);
+    checkoutCart(data) {
+        return axiosClient.post(`customer/checkout/`, data);
     },
 };

@@ -5,7 +5,6 @@ import { ProcessOrder } from "./ProcessOrder";
 export function MyOrders() {
     return (
         <Container>
-            <ProcessOrder />
             <ListOrders />
         </Container>
     )
