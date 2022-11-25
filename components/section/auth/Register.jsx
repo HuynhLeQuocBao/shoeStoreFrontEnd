@@ -60,7 +60,7 @@ export function Register() {
 			});
 			setTimeout(() => {
 				router.push("/login");
-			}, 3000);
+			}, 2000);
 		}
 	};
 

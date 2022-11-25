@@ -1,21 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import { Container } from "@/components/common/index";
-import { authApi } from "@/apiClient/auth";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
-import { getSession, useSession, signIn, signOut } from "next-auth/react";
-import { cartApi } from "@/apiClient/cartAPI";
+import { useSession, signIn } from "next-auth/react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function Login() {
-	const { data: session, status } = useSession();
+	const { data: session } = useSession();
 	const router = useRouter();
 	if (session) {
-		router.push("/");
+		setTimeout(() => {
+			router.push("/");
+		}, 1000);
 	}
 
 	const {
@@ -29,18 +27,18 @@ export function Login() {
 			...data,
 			redirect: false,
 		});
-		if (!ok) {
-			toast.error('Invalid account name or password !', {
+
+		if (ok.status == 401) {
+			toast.error('Login Fail. Try again!', {
 				position: toast.POSITION.TOP_RIGHT
 			});
 		}
 		else {
-			toast.success('Login Successfully !', {
+			toast.success('Login Successfully!', {
 				position: toast.POSITION.TOP_RIGHT
 			});
 		}
 	};
-
 
 	return (
 		<Container>
