@@ -29,6 +29,8 @@ export function ProductDetail() {
     pauseOnHover: false,
   };
 
+  const sizes = ["5", "5.5", "6", "6.5", "7", "7.5", "8", "9", "10"];
+
   const handleAsc = () => {
     if (quantity < 1) {
       setQuantity(1);
@@ -118,8 +120,8 @@ export function ProductDetail() {
               <div className="w-full mt-4 mb-8">
                 <h3 className="pb-2">SIZE</h3>
                 {
-                  data?.size?.map((item, index) => (
-                    <button onClick={() => setSize(item.size)} className={`w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm  text-white cursor-pointer ${size === item.size ? "bg-primary" : "bg-[#ccc]"}`} key={index}>{item.size}</button>
+                  sizes.map((item, index) => (
+                    <button onClick={() => setSize(item)} className={`w-10 h-10 mr-1 mb-1 hover:bg-primary rounded-sm  text-white cursor-pointer ${size === item ? "bg-primary" : "bg-[#ccc]"}`} key={index}>{item}</button>
                   ))
                 }
               </div>
