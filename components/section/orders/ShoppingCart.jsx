@@ -124,7 +124,7 @@ export function ShoppingCart() {
 
             </div>
             <div className='w-full px-4 my-32 md:hidden'>
-                {dataCart.length > 0 ?
+                {dataCart?.length > 0 ?
                     dataCart.map((item, index) => {
                         return (
                             <div key={index} className='w-full grid grid-cols-12 mb-5 shadow-lg rounded-lg py-2'>

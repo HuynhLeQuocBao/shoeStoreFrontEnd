@@ -5,12 +5,19 @@ import { cartApi } from '@/apiClient/cartAPI';
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { ProgressCart } from '.';
+import { useSession } from 'next-auth/react';
 
 
 export function Checkout() {
     const router = useRouter()
+    const { data: session } = useSession();
+    console.log('session', session?.user?.fullname)
     const [data, setData] = useState([])
     const [subTotal, setSubTotal] = useState(0)
+    const [fullname, setFullname] = useState(session?.user?.fullname)
+    const [address, setAddress] = useState(session?.user?.address)
+    const [numberphone, setNumberPhone] = useState(session?.user?.numberPhone)
+    const [email, setEmail] = useState(session?.user?.email)
     const {
         register,
         control,
@@ -40,15 +47,16 @@ export function Checkout() {
         try {
             const fetchCheckoutCart = async () => {
                 const result = await cartApi.checkoutCart({
-                    fullname: data.firstName + ' ' + data.lastName,
-                    address: data.address,
-                    numberPhone: data.numberPhone,
-                    email: data.email,
+                    fullname: fullname,
+                    address: address,
+                    numberPhone: numberphone,
+                    email: email,
                 });
                 console.log(result)
                 if (result) {
+                    router.push('/order-complete')
                     setTimeout(() => {
-                        router.push('/order-complete')
+
                         router.reload(window.location.pathname)
                     }, 500);
                 }
@@ -70,36 +78,20 @@ export function Checkout() {
                                 <h1>Billing Details</h1>
                             </div>
                             <div className='w-full my-4 grid grid-cols-12 gap-3 '>
-                                <div className='col-span-6'>
+                                <div className='col-span-12'>
                                     <Controller
                                         control={control}
-                                        name='firstName'
+                                        name='fullname'
                                         render={({ field }) => (
                                             <div className='col-span-6'>
-                                                <label htmlFor='firstName'>FIRST NAME</label>
+                                                <label htmlFor='fullname'>FIRST NAME</label>
                                                 <input
-                                                    id='firstName'
-                                                    placeholder='First Name'
+                                                    id='fullname'
+                                                    placeholder='Full Name'
+                                                    value={fullname}
+                                                    onChange={e => setFullname(e.target.value)}
                                                     className='w-full p-4 rounded-xl my-2'
-                                                    {...register("firstName")}
-
-                                                />
-                                            </div>
-                                        )}
-                                    />
-                                </div>
-                                <div className='col-span-6'>
-                                    <Controller
-                                        control={control}
-                                        name='lastName'
-                                        render={({ field }) => (
-                                            <div>
-                                                <label htmlFor='lastName'>LAST NAME</label>
-                                                <input
-                                                    id='lastName'
-                                                    placeholder='Last Name'
-                                                    className='w-full p-4 rounded-xl my-2'
-                                                    {...register("lastName")}
+                                                    {...register("fullname")}
 
                                                 />
                                             </div>
@@ -117,6 +109,8 @@ export function Checkout() {
                                             <input
                                                 id='address'
                                                 placeholder='Address'
+                                                value={address}
+                                                onChange={e => setAddress(e.target.value)}
                                                 className='w-full p-4 rounded-xl my-2'
                                                 {...register("address")}
 
@@ -135,6 +129,8 @@ export function Checkout() {
                                             <input
                                                 id='phone'
                                                 placeholder='Number Phone'
+                                                value={numberphone}
+                                                onChange={e => setNumberPhone(e.target.value)}
                                                 className='w-full p-4 rounded-xl my-2'
                                                 {...register("numberPhone")}
                                             />
@@ -152,6 +148,8 @@ export function Checkout() {
                                             <input
                                                 id='email'
                                                 name='email'
+                                                value={email}
+                                                onChange={e => setEmail(e.target.value)}
                                                 placeholder='Email'
                                                 className='w-full p-4 rounded-xl my-2'
                                                 {...register("email")}
@@ -173,7 +171,7 @@ export function Checkout() {
                                     <p className='w-[40%] text-sm'>$ {subTotal}</p>
                                 </div>
                                 {
-                                    data.map((item) => {
+                                    data?.map((item) => {
                                         return (
                                             <div key={item._id} className='border-b-2 my-2 w-full flex'>
                                                 <span className='w-[60%]'>{item?.quantity}*{item?.productName} </span>
