@@ -146,6 +146,16 @@ export function Header() {
   const ShowModal = () => setOpen(true);
   const onSubmit = async (value) => {
     console.log(value)
+    try {
+      const fechPublic = async () => {
+        const dataProduct = await productApi.searchProducts(value.search);
+        console.log(dataProduct)
+        // console.log('dataProduct', router.query.slug)
+      };
+      fechPublic();
+    } catch (error) {
+      console.log("Error");
+    }
     router.push(`/search-product/${value.search}`)
   }
   return (

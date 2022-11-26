@@ -20,7 +20,7 @@ export function SearchProduct() {
         } catch (error) {
             console.log("Error");
         }
-    },);
+    }, [router.query.slug]);
 
     return (
         <Container>
@@ -29,7 +29,12 @@ export function SearchProduct() {
                     <Category />
                 </div>
                 <div className="col-span-3">
-                    <Pagination data={data} itemsPerPage={9} />
+                    {data?.length > 0 ?
+                        <Pagination data={data} itemsPerPage={9} />
+                        :
+                        <div className="w-full text-center">Not found</div>
+                    }
+
                 </div>
             </div>
         </Container>
