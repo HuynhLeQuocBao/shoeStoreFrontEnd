@@ -34,7 +34,6 @@ export function SearchProduct() {
                         :
                         <div className="w-full text-center">Not found</div>
                     }
-
                 </div>
             </div>
         </Container>

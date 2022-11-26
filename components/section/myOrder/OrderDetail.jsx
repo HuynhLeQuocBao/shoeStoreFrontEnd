@@ -65,7 +65,9 @@ export function OrderDetail() {
             toast.success('Cancel successfully!', {
                 position: toast.POSITION.TOP_RIGHT
             });
-            router.push('/my-orders')
+            setTimeout(() => {
+                router.push('/my-orders')
+            }, 1500);
         } catch (error) {
             toast.error(error, {
                 position: toast.POSITION.TOP_RIGHT
